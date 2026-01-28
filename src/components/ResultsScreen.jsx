@@ -22,7 +22,7 @@ const MODE_LABELS = {
 };
 
 export default function ResultsScreen() {
-  const { answers, returnToHome, bestSessionStreak, allTimeBestStreak, startGame, startPracticeMode, startImproveMode, selectedRegion, gameMode, sessionMode } = useGame();
+  const { answers, returnToHome, bestSessionStreak, allTimeBestStreak, startGame, startPracticeMode, startImproveMode, selectedRegion, gameMode, sessionMode, sessionHintsUsed } = useGame();
   const stats = getStats();
 
   // Play celebration sound on mount
@@ -69,6 +69,12 @@ export default function ResultsScreen() {
             </span>
           </div>
           <div className="summary-item">
+            <span className="summary-label">Hints Used</span>
+            <span className="summary-value hints">
+              {sessionHintsUsed > 0 ? `💡 ${sessionHintsUsed}` : '✨ None!'}
+            </span>
+          </div>
+          <div className="summary-item">
             <span className="summary-label">All-Time Best Streak</span>
             <span className="summary-value">
               {allTimeBestStreak > 0 ? `🏆 ${allTimeBestStreak}` : '-'}
@@ -107,6 +113,11 @@ export default function ResultsScreen() {
                   </div>
                   <div className="answer-user">
                     Your answer: <span className="user-answer">{answer.userAnswer}</span>
+                    {answer.hintsUsed > 0 && (
+                      <span className="hints-used-badge" title={`Used ${answer.hintsUsed} hint${answer.hintsUsed > 1 ? 's' : ''}`}>
+                        💡{answer.hintsUsed}
+                      </span>
+                    )}
                   </div>
                   {!answer.isCorrect && (
                     <div className="answer-correct">

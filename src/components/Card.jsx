@@ -3,6 +3,7 @@
  * Implements FR-2.1-2.4, FR-3.1-3.6
  * Phase 2: Enhanced animations, mastery badges
  * Phase 4: Sound effects integration
+ * Phase 5: Hint system integration
  */
 
 import { useState, useRef, useEffect } from 'react';
@@ -10,6 +11,8 @@ import PropTypes from 'prop-types';
 import { useGame } from '../context/GameContext';
 import { fuzzyMatch, getAllAnswers } from '../utils/fuzzyMatch';
 import { playCorrectSound, playIncorrectSound } from '../utils/audio';
+import { getHint, getMaxHintLevel, getHintButtonLabel } from '../utils/hints';
+import { getMnemonic, getCategoryLabel } from '../utils/mnemonics';
 import './Card.css';
 
 /**
@@ -28,7 +31,18 @@ export default function Card({ question }) {
   const [feedback, setFeedback] = useState(null);
   const [showingFeedback, setShowingFeedback] = useState(false);
   const [animationClass, setAnimationClass] = useState('');
+  const [hintLevel, setHintLevel] = useState(0);
+  const [showHintButton, setShowHintButton] = useState(false);
   const inputRef = useRef(null);
+
+  // Get the correct answer for hints
+  const getCorrectAnswer = () => {
+    if (question.mode === 'countryToCapital') {
+      return question.capital;
+    } else {
+      return question.country;
+    }
+  };
 
   // Focus input when card loads
   useEffect(() => {
@@ -37,11 +51,25 @@ export default function Card({ question }) {
     setFeedback(null);
     setShowingFeedback(false);
     setAnimationClass('card-enter');
+    setHintLevel(0);
+    setShowHintButton(false);
+    
+    // Show hint button after 3 seconds of thinking
+    const hintTimer = setTimeout(() => setShowHintButton(true), 3000);
     
     // Remove entrance animation class after it plays
     const timer = setTimeout(() => setAnimationClass(''), 300);
-    return () => clearTimeout(timer);
+    return () => {
+      clearTimeout(timer);
+      clearTimeout(hintTimer);
+    };
   }, [question]);
+
+  const handleGetHint = () => {
+    if (hintLevel < getMaxHintLevel()) {
+      setHintLevel(hintLevel + 1);
+    }
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -70,7 +98,7 @@ export default function Card({ question }) {
 
     // Wait before moving to next question
     setTimeout(() => {
-      submitAnswer(userAnswer, isCorrect);
+      submitAnswer(userAnswer, isCorrect, hintLevel);
     }, 1500);
   };
 
@@ -144,6 +172,36 @@ export default function Card({ question }) {
               ))}
             </div>
           )}
+
+          {/* Hint Section */}
+          {!showingFeedback && (showHintButton || hintLevel > 0) && (
+            <div className="hint-section">
+              {hintLevel > 0 && (
+                <div className="hint-display">
+                  <span className="hint-label">Hint:</span>
+                  <span className="hint-text">{getHint(getCorrectAnswer(), hintLevel)}</span>
+                </div>
+              )}
+              {hintLevel < getMaxHintLevel() && (
+                <button
+                  type="button"
+                  className="hint-button"
+                  onClick={handleGetHint}
+                  aria-label={getHintButtonLabel(hintLevel)}
+                >
+                  {getHintButtonLabel(hintLevel)}
+                  {hintLevel > 0 && (
+                    <span className="hint-count">({hintLevel}/{getMaxHintLevel()})</span>
+                  )}
+                </button>
+              )}
+              {hintLevel > 0 && (
+                <div className="hint-penalty">
+                  Using hints reduces your score
+                </div>
+              )}
+            </div>
+          )}
         </div>
 
         <form onSubmit={handleSubmit} className="answer-form">
@@ -183,6 +241,16 @@ export default function Card({ question }) {
               <div className="feedback-content">
                 <span className="feedback-icon">✗</span>
                 <span>The correct answer is: {feedback.correctAnswer}</span>
+              </div>
+            )}
+            
+            {/* Mnemonic tip - show after correct or incorrect answer */}
+            {getMnemonic(question.id) && (
+              <div className="mnemonic-tip">
+                <div className="mnemonic-header">
+                  <span className="mnemonic-category">{getCategoryLabel(getMnemonic(question.id).category)}</span>
+                </div>
+                <p className="mnemonic-text">{getMnemonic(question.id).tip}</p>
               </div>
             )}
           </div>

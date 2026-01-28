@@ -246,6 +246,53 @@
   letter-spacing: var(--tracking-wide);
 }
 
+/* World Progress Button */
+.world-progress-btn {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-4);
+  background: var(--bg-card);
+  border: 2px dashed var(--border-medium);
+  border-radius: var(--radius-xl);
+  cursor: pointer;
+  transition: all var(--duration-normal) var(--ease-out);
+  margin-bottom: var(--space-6);
+}
+
+.world-progress-btn:hover {
+  border-color: var(--interactive-primary);
+  border-style: solid;
+  background: var(--bg-secondary);
+  transform: translateY(-1px);
+}
+
+.world-progress-btn:focus {
+  outline: 3px solid var(--focus-ring);
+  outline-offset: 2px;
+}
+
+.progress-btn-icon {
+  font-size: var(--text-2xl);
+}
+
+.progress-btn-text {
+  font-size: var(--text-base);
+  font-weight: var(--font-semibold);
+  color: var(--text-primary);
+  flex: 1;
+  text-align: left;
+}
+
+.progress-btn-count {
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+  background: var(--bg-secondary);
+  padding: var(--space-1) var(--space-3);
+  border-radius: var(--radius-full);
+}
+
 /* Action buttons container */
 .action-buttons {
   display: flex;
@@ -256,10 +303,11 @@
 /* Secondary buttons (Practice/Improve) */
 .secondary-buttons {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   gap: var(--space-3);
 }
 
+.study-button,
 .practice-button,
 .improve-button {
   display: flex;
@@ -277,6 +325,18 @@
   min-height: 48px;
   position: relative;
   background: var(--bg-card);
+}
+
+.study-button {
+  color: var(--interactive-primary);
+  border-color: var(--interactive-primary);
+}
+
+.study-button:hover {
+  background: var(--interactive-primary);
+  color: var(--text-inverse);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-sm);
 }
 
 .practice-button {
@@ -371,6 +431,7 @@
     gap: var(--space-2);
   }
 
+  .study-button,
   .practice-button,
   .improve-button {
     padding: var(--space-3) var(--space-2);

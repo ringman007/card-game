@@ -11,7 +11,8 @@ export const ACHIEVEMENT_CATEGORIES = {
   PROGRESS: 'progress',
   MASTERY: 'mastery',
   STREAK: 'streak',
-  EXPLORER: 'explorer'
+  EXPLORER: 'explorer',
+  LEARNING: 'learning'
 };
 
 /**
@@ -197,6 +198,43 @@ export const ACHIEVEMENTS = [
           id.startsWith(`${region}-`) && p.timesCorrect > 0
         )
       );
+    }
+  },
+
+  // Learning achievements (Phase 5)
+  {
+    id: 'no_hints_session',
+    name: 'Pure Knowledge',
+    description: 'Complete a perfect session without using any hints',
+    emoji: '🧠',
+    category: ACHIEVEMENT_CATEGORIES.LEARNING,
+    checkUnlock: (stats, sessionData) => 
+      sessionData && 
+      sessionData.correct === sessionData.total && 
+      sessionData.total > 0 &&
+      sessionData.hintsUsed === 0
+  },
+  {
+    id: 'wise_learner',
+    name: 'Wise Learner',
+    description: 'Use hints to learn and still get the answer right',
+    emoji: '💡',
+    category: ACHIEVEMENT_CATEGORIES.LEARNING,
+    checkUnlock: (stats, sessionData) => 
+      sessionData && 
+      sessionData.hintsUsed > 0 &&
+      sessionData.correct > 0
+  },
+  {
+    id: 'region_complete',
+    name: 'Regional Expert',
+    description: 'Explore at least 25 unique countries',
+    emoji: '🗺️',
+    category: ACHIEVEMENT_CATEGORIES.LEARNING,
+    checkUnlock: (stats, sessionData, progress) => {
+      // Count unique countries explored
+      const exploreCount = Object.values(progress || {}).filter(p => p.timesShown > 0).length;
+      return exploreCount >= 25;
     }
   }
 ];

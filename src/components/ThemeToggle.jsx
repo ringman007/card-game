@@ -7,7 +7,7 @@ import { useTheme } from '../context/ThemeContext';
 import './ThemeToggle.css';
 
 export default function ThemeToggle() {
-  const { themePreference, setTheme, isDark } = useTheme();
+  const { themePreference, setTheme } = useTheme();
 
   const options = [
     { value: 'light', icon: '☀️', label: 'Light' },

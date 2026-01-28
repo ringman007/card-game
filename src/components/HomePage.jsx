@@ -3,15 +3,19 @@
  * Implements FR-1.1, FR-1.2, FR-7.1
  * Phase 3: Added Practice and Improve mode buttons, Stats Dashboard
  * Phase 4: Added ThemeToggle and SoundToggle
+ * Phase 5: Added Study Mode for flashcard learning
  */
 
 import { useState } from 'react';
 import { useGame } from '../context/GameContext';
 import { getUserProgress, getStats } from '../utils/localStorage';
 import { initializeAudio } from '../utils/audio';
+import { getSessionQuestions } from '../utils/questionSelector';
 import StatsDashboard from './StatsDashboard';
 import ThemeToggle from './ThemeToggle';
 import SoundToggle from './SoundToggle';
+import StudyMode from './StudyMode';
+import ProgressMap from './ProgressMap';
 import './HomePage.css';
 
 /**
@@ -30,6 +34,8 @@ const REGION_EMOJI = {
 export default function HomePage() {
   const { selectedRegion, setSelectedRegion, gameMode, setGameMode, availableRegions, startGame, startPracticeMode, startImproveMode } = useGame();
   const [showStats, setShowStats] = useState(false);
+  const [showProgressMap, setShowProgressMap] = useState(false);
+  const [studyModeCards, setStudyModeCards] = useState(null);
   
   // Check if practice/improve modes are available
   const progress = getUserProgress();
@@ -54,6 +60,29 @@ export default function HomePage() {
     initializeAudio();
     startImproveMode(gameMode);
   };
+
+  const handleStartStudy = () => {
+    initializeAudio();
+    // Get 20 cards for study mode (more than quiz for better practice)
+    const cards = getSessionQuestions(selectedRegion, 20, gameMode);
+    setStudyModeCards(cards);
+  };
+
+  const handleExitStudy = () => {
+    setStudyModeCards(null);
+  };
+
+  // Show study mode if active
+  if (studyModeCards) {
+    return (
+      <StudyMode
+        cards={studyModeCards}
+        region={selectedRegion}
+        gameMode={gameMode}
+        onExit={handleExitStudy}
+      />
+    );
+  }
 
   return (
     <div className="home-page">
@@ -107,6 +136,19 @@ export default function HomePage() {
             </div>
             <div className="stats-preview-hint">Tap for details</div>
           </div>
+        )}
+
+        {/* World Progress Quick Access */}
+        {answeredCount > 0 && (
+          <button 
+            className="world-progress-btn"
+            onClick={() => setShowProgressMap(true)}
+            aria-label="View world progress map"
+          >
+            <span className="progress-btn-icon">📍</span>
+            <span className="progress-btn-text">World Progress</span>
+            <span className="progress-btn-count">{answeredCount} explored</span>
+          </button>
         )}
 
         <div className="settings-container">
@@ -166,6 +208,16 @@ export default function HomePage() {
 
           <div className="secondary-buttons">
             <button 
+              onClick={handleStartStudy}
+              className="study-button"
+              title="Study with flashcards at your own pace"
+              aria-label="Start study mode with flashcards"
+            >
+              <span className="button-emoji">🃏</span>
+              <span>Study</span>
+            </button>
+
+            <button 
               onClick={handlePractice}
               className="practice-button"
               disabled={!canPractice}
@@ -193,6 +245,9 @@ export default function HomePage() {
 
       {/* Stats Dashboard Modal */}
       {showStats && <StatsDashboard onClose={() => setShowStats(false)} />}
+      
+      {/* Progress Map Modal */}
+      {showProgressMap && <ProgressMap onClose={() => setShowProgressMap(false)} />}
     </div>
   );
 }

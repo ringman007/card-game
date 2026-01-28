@@ -89,7 +89,7 @@ export function GameProvider({ children }) {
     setGameMode(mode);
   };
 
-  const submitAnswer = (userAnswer, isCorrect) => {
+  const submitAnswer = (userAnswer, isCorrect, hintsUsed = 0) => {
     const currentQuestion = questions[currentQuestionIndex];
     
     // Update streak
@@ -104,11 +104,12 @@ export function GameProvider({ children }) {
       setCurrentStreak(0);
     }
     
-    // Record answer
+    // Record answer with hints tracking
     const answerRecord = {
       question: currentQuestion,
       userAnswer,
       isCorrect,
+      hintsUsed,
       streakAtTime: newStreak,
       timestamp: new Date().toISOString()
     };
@@ -142,7 +143,8 @@ export function GameProvider({ children }) {
       // Check for newly unlocked achievements
       const stats = getStats();
       const progress = getUserProgress();
-      const sessionData = { correct: correctCount, total: newAnswers.length };
+      const sessionHints = newAnswers.reduce((total, a) => total + (a.hintsUsed || 0), 0);
+      const sessionData = { correct: correctCount, total: newAnswers.length, hintsUsed: sessionHints };
       const newAchievements = checkNewAchievements(stats, sessionData, progress);
       if (newAchievements.length > 0) {
         setPendingAchievements(prev => [...prev, ...newAchievements]);
@@ -183,6 +185,7 @@ export function GameProvider({ children }) {
     allTimeBestStreak,
     sessionCorrect: answers.filter(a => a.isCorrect).length,
     sessionAnswered: answers.length,
+    sessionHintsUsed: answers.reduce((total, a) => total + (a.hintsUsed || 0), 0),
     startGame,
     startPracticeMode,
     startImproveMode,

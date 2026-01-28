@@ -1,0 +1,198 @@
+{
+  "AUS": {
+    "tip": "CANberra is where they CAN govern Australia",
+    "category": "wordplay"
+  },
+  "BRA": {
+    "tip": "Brazil moved its capital to Brasília from Rio - they named it after themselves!",
+    "category": "fact"
+  },
+  "CAN": {
+    "tip": "Ottawa sounds like 'Oh, TWO' - Canada's second language is French",
+    "category": "wordplay"
+  },
+  "TUR": {
+    "tip": "Turkey's capital ANKara sounds like 'anchor' - anchored in the middle of the country",
+    "category": "wordplay"
+  },
+  "CHE": {
+    "tip": "BERN is where Swiss chocolate BURNs on your tongue - it's that good!",
+    "category": "wordplay"
+  },
+  "USA": {
+    "tip": "WASH-ington - where they 'wash' their dirty political laundry",
+    "category": "wordplay"
+  },
+  "NZL": {
+    "tip": "Wellington sounds like 'wellies' - boots for the rainy New Zealand weather",
+    "category": "wordplay"
+  },
+  "MYS": {
+    "tip": "Kuala LUMPur - imagine a LUMP of gold in Malaysia",
+    "category": "wordplay"
+  },
+  "ZAF": {
+    "tip": "PREtoria - it's the PREmier administrative capital of South Africa",
+    "category": "wordplay"
+  },
+  "IND": {
+    "tip": "NEW Delhi - they built a NEW capital next to OLD Delhi",
+    "category": "fact"
+  },
+  "PAK": {
+    "tip": "ISLAMabad - named for ISLAM, Pakistan's main religion",
+    "category": "etymology"
+  },
+  "MMR": {
+    "tip": "Nay Pyi Taw is a brand NEW capital - built in 2006!",
+    "category": "fact"
+  },
+  "KAZ": {
+    "tip": "ASTana → NUR-Sultan → ASTANA again - it's had many names like Kazakhstan's flag changes",
+    "category": "fact"
+  },
+  "AUT": {
+    "tip": "VIENna - think of Vienna WALTZES, the famous dance",
+    "category": "association"
+  },
+  "HUN": {
+    "tip": "BUDApest = BUDA + PEST, two cities merged by a bridge",
+    "category": "etymology"
+  },
+  "NLD": {
+    "tip": "AmsterDAM - built on a DAM on the Amstel river",
+    "category": "etymology"
+  },
+  "IRL": {
+    "tip": "DUBLIN - DUB sounds like pub, the Irish love their pubs!",
+    "category": "wordplay"
+  },
+  "SWE": {
+    "tip": "STOCKholm - like a 'stock' of IKEA furniture",
+    "category": "wordplay"
+  },
+  "NOR": {
+    "tip": "OSLO sounds like 'OZ-low' - it's at a low point on the fjord",
+    "category": "wordplay"
+  },
+  "DNK": {
+    "tip": "COPENhagen - where you COPE with the cold Danish winters",
+    "category": "wordplay"
+  },
+  "FIN": {
+    "tip": "HELsinki - sounds like HELL-sinky, but it's actually quite nice!",
+    "category": "wordplay"
+  },
+  "POL": {
+    "tip": "WARsaw - where WARS were fought in WWII",
+    "category": "association"
+  },
+  "CZE": {
+    "tip": "PRAGUE rhymes with 'vague' - the foggy old city",
+    "category": "wordplay"
+  },
+  "GRC": {
+    "tip": "ATHENS - where ATHletes competed in the first Olympics",
+    "category": "etymology"
+  },
+  "ITA": {
+    "tip": "ROME - all roads lead there, as they say!",
+    "category": "proverb"
+  },
+  "ESP": {
+    "tip": "MADrid - where you go MAD for tapas and football",
+    "category": "wordplay"
+  },
+  "PRT": {
+    "tip": "LISbon - LIS sounds like 'list' - list Portugal's oldest city",
+    "category": "wordplay"
+  },
+  "FRA": {
+    "tip": "PARIS - where you meet a 'pair' of lovers by the Eiffel Tower",
+    "category": "wordplay"
+  },
+  "DEU": {
+    "tip": "BERLIN - the WALL was 'built-in' during the Cold War",
+    "category": "association"
+  },
+  "GBR": {
+    "tip": "LONDON - home of the LONgest-reigning monarchy",
+    "category": "wordplay"
+  },
+  "RUS": {
+    "tip": "MOSCOW - sounds like 'MOS-cow' - where Russian bears roam!",
+    "category": "wordplay"
+  },
+  "CHN": {
+    "tip": "BeiJING means 'Northern Capital' in Chinese - JINGdu means capital",
+    "category": "etymology"
+  },
+  "JPN": {
+    "tip": "TOKYO means 'Eastern Capital' - it's east of the old capital Kyoto",
+    "category": "etymology"
+  },
+  "KOR": {
+    "tip": "SEOUL sounds like 'soul' - the heart and SOUL of Korea",
+    "category": "wordplay"
+  },
+  "THA": {
+    "tip": "BANGKOK - think of loud BANGS from fireworks during Thai festivals",
+    "category": "wordplay"
+  },
+  "VNM": {
+    "tip": "HANOI - 'ha-NOI' rhymes with 'enjoy' in a French accent",
+    "category": "wordplay"
+  },
+  "IDN": {
+    "tip": "JAKARTA is on JAVA island - like Java coffee!",
+    "category": "association"
+  },
+  "PHL": {
+    "tip": "MANILA folders! The color was inspired by Manila hemp from Philippines",
+    "category": "fact"
+  },
+  "EGY": {
+    "tip": "CAIRO sounds like 'care-oh' - take CARE around the pyramids!",
+    "category": "wordplay"
+  },
+  "NGA": {
+    "tip": "ABUJA is in the center - they ABU-it (built it) to be central!",
+    "category": "wordplay"
+  },
+  "KEN": {
+    "tip": "NAIROBI - NAI sounds like 'nigh' - lions are always nearby",
+    "category": "wordplay"
+  },
+  "ETH": {
+    "tip": "ADDIS ABABA means 'new flower' - it's at a high altitude",
+    "category": "etymology"
+  },
+  "MAR": {
+    "tip": "RABAT sounds like 'rabbit' - picture rabbits in Morocco",
+    "category": "wordplay"
+  },
+  "MEX": {
+    "tip": "MEXICO City - named after the country, they kept it simple!",
+    "category": "fact"
+  },
+  "ARG": {
+    "tip": "BUENOS AIRES means 'good airs' - fresh breezes from the river",
+    "category": "etymology"
+  },
+  "PER": {
+    "tip": "LIMA sounds like 'lima bean' - Peru grows lots of beans!",
+    "category": "wordplay"
+  },
+  "COL": {
+    "tip": "BOGOTÁ - think of Colombian COFFEE and you'll remember BO-go-TA",
+    "category": "association"
+  },
+  "CHL": {
+    "tip": "SANTIAGO - named after Saint James (Santiago in Spanish)",
+    "category": "etymology"
+  },
+  "VEN": {
+    "tip": "CARACAS - sounds like 'car-AH-cas' - picture cars in Venezuela",
+    "category": "wordplay"
+  }
+}

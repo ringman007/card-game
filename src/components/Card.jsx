@@ -4,6 +4,7 @@
  */
 
 import { useState, useRef, useEffect } from 'react';
+import PropTypes from 'prop-types';
 import { useGame } from '../context/GameContext';
 import { fuzzyMatch, getAllAnswers } from '../utils/fuzzyMatch';
 import './Card.css';
@@ -143,3 +144,16 @@ export default function Card({ question }) {
     </div>
   );
 }
+
+Card.propTypes = {
+  question: PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    mode: PropTypes.string.isRequired,
+    country: PropTypes.string.isRequired,
+    countryAlternatives: PropTypes.arrayOf(PropTypes.string).isRequired,
+    capital: PropTypes.string.isRequired,
+    capitalAlternatives: PropTypes.arrayOf(PropTypes.string).isRequired,
+    multipleCapitals: PropTypes.bool.isRequired,
+    region: PropTypes.string.isRequired
+  }).isRequired
+};

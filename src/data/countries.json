@@ -949,9 +949,9 @@
     "country": "Malaysia",
     "countryAlternatives": [],
     "capital": "Kuala Lumpur",
-    "capitalAlternatives": [],
+    "capitalAlternatives": ["Putrajaya"],
     "region": "Asia",
-    "multipleCapitals": false
+    "multipleCapitals": true
   },
   {
     "id": "MDV",
@@ -1482,7 +1482,7 @@
     "capital": "Sri Jayawardenepura Kotte",
     "capitalAlternatives": ["Colombo"],
     "region": "Asia",
-    "multipleCapitals": false
+    "multipleCapitals": true
   },
   {
     "id": "SDN",

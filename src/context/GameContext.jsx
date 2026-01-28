@@ -3,6 +3,7 @@
  */
 
 import { createContext, useContext, useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
 import { getSessionQuestions, getAvailableRegions } from '../utils/questionSelector';
 import { updateQuestionProgress, getSettings, saveSettings } from '../utils/localStorage';
 
@@ -87,6 +88,10 @@ export function GameProvider({ children }) {
 
   return <GameContext.Provider value={value}>{children}</GameContext.Provider>;
 }
+
+GameProvider.propTypes = {
+  children: PropTypes.node.isRequired
+};
 
 export function useGame() {
   const context = useContext(GameContext);

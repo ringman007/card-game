@@ -3,6 +3,7 @@
  * Shows current question number out of total
  */
 
+import PropTypes from 'prop-types';
 import './ProgressIndicator.css';
 
 export default function ProgressIndicator({ current, total }) {
@@ -26,3 +27,8 @@ export default function ProgressIndicator({ current, total }) {
     </div>
   );
 }
+
+ProgressIndicator.propTypes = {
+  current: PropTypes.number.isRequired,
+  total: PropTypes.number.isRequired
+};

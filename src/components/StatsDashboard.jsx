@@ -2,10 +2,12 @@
  * StatsDashboard Component
  * Shows comprehensive statistics and performance tracking
  * Phase 3: Session history, trends, mastery by region, export
+ * Phase 4: Achievements display
  */
 
 import PropTypes from 'prop-types';
 import { getStats, getUserProgress } from '../utils/localStorage';
+import { getAllAchievementsWithStatus } from '../data/achievements';
 import countriesData from '../data/countries.json';
 import './StatsDashboard.css';
 
@@ -95,6 +97,8 @@ export default function StatsDashboard({ onClose }) {
   const progress = getUserProgress();
   const masteryByRegion = getMasteryByRegion(progress);
   const trends = calculateTrends(stats.sessionHistory || []);
+  const achievements = getAllAchievementsWithStatus();
+  const unlockedCount = achievements.filter(a => a.isUnlocked).length;
   
   const answeredCount = Object.keys(progress).filter(id => progress[id].timesShown > 0).length;
   const totalCountries = countriesData.length;
@@ -192,6 +196,30 @@ export default function StatsDashboard({ onClose }) {
                 </div>
               );
             })}
+          </div>
+        </div>
+
+        {/* Achievements */}
+        <div className="stats-section">
+          <h3 className="section-title">
+            🏆 Achievements ({unlockedCount}/{achievements.length})
+          </h3>
+          <div className="achievements-grid">
+            {achievements.map(achievement => (
+              <div 
+                key={achievement.id} 
+                className={`achievement-item ${achievement.isUnlocked ? 'unlocked' : 'locked'}`}
+                title={achievement.isUnlocked 
+                  ? `Unlocked: ${achievement.description}` 
+                  : `Locked: ${achievement.description}`
+                }
+              >
+                <span className="achievement-emoji">
+                  {achievement.isUnlocked ? achievement.emoji : '🔒'}
+                </span>
+                <span className="achievement-name">{achievement.name}</span>
+              </div>
+            ))}
           </div>
         </div>
 

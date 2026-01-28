@@ -3,10 +3,13 @@
  * Shows session results and statistics
  * Phase 2: Enhanced with streak display and session summary
  * Phase 3: Added session mode display and mode-aware play again
+ * Phase 4: Added session complete sound effect
  */
 
+import { useEffect } from 'react';
 import { useGame } from '../context/GameContext';
 import { getStats } from '../utils/localStorage';
+import { playCompleteSound } from '../utils/audio';
 import './ResultsScreen.css';
 
 /**
@@ -21,6 +24,11 @@ const MODE_LABELS = {
 export default function ResultsScreen() {
   const { answers, returnToHome, bestSessionStreak, allTimeBestStreak, startGame, startPracticeMode, startImproveMode, selectedRegion, gameMode, sessionMode } = useGame();
   const stats = getStats();
+
+  // Play celebration sound on mount
+  useEffect(() => {
+    playCompleteSound();
+  }, []);
 
   const correctCount = answers.filter(a => a.isCorrect).length;
   const totalCount = answers.length;

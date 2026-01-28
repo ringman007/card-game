@@ -1,6 +1,7 @@
 /**
  * Global App Styles
  * Phase 3: Added accessibility styles
+ * Phase 4: Updated to use design tokens
  */
 
 #root {
@@ -14,25 +15,25 @@
   top: -100px;
   left: 50%;
   transform: translateX(-50%);
-  background: #667eea;
-  color: white;
-  padding: 1rem 2rem;
+  background: var(--interactive-primary);
+  color: var(--text-inverse);
+  padding: var(--space-4) var(--space-8);
   text-decoration: none;
-  font-weight: 600;
-  border-radius: 0 0 8px 8px;
-  z-index: 9999;
-  transition: top 0.2s ease;
+  font-weight: var(--font-semibold);
+  border-radius: 0 0 var(--radius-lg) var(--radius-lg);
+  z-index: var(--z-tooltip);
+  transition: top var(--duration-fast) var(--ease-out);
 }
 
 .skip-link:focus {
   top: 0;
-  outline: 3px solid #f59e0b;
+  outline: 3px solid var(--focus-ring);
   outline-offset: 2px;
 }
 
 /* Global focus styles for accessibility */
 *:focus-visible {
-  outline: 3px solid #667eea;
+  outline: 3px solid var(--focus-ring);
   outline-offset: 2px;
 }
 
@@ -40,7 +41,7 @@
 button:focus-visible,
 select:focus-visible,
 input:focus-visible {
-  outline: 3px solid #667eea;
+  outline: 3px solid var(--focus-ring);
   outline-offset: 2px;
-  box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.2);
+  box-shadow: 0 0 0 4px rgba(212, 168, 75, 0.25);
 }

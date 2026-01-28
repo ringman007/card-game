@@ -1,14 +1,79 @@
+/**
+ * GameSession Styles
+ * Phase 4: Warm Paper/Educational Theme with Back Button
+ */
+
 .game-session {
   display: flex;
   flex-direction: column;
   align-items: center;
   min-height: 100vh;
-  padding: 2rem;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  padding: var(--space-8);
+  background: var(--bg-primary);
+  transition: background-color var(--duration-normal) var(--ease-out);
+}
+
+.game-session-header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  width: 100%;
+  max-width: 500px;
+  margin-bottom: var(--space-6);
+}
+
+.back-to-home-button {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-2) var(--space-3);
+  background: var(--bg-card);
+  border: 1px solid var(--border-medium);
+  border-radius: var(--radius-md);
+  color: var(--text-secondary);
+  font-size: var(--text-sm);
+  font-weight: var(--font-medium);
+  cursor: pointer;
+  transition: all var(--duration-fast) var(--ease-out);
+  font-family: inherit;
+  flex-shrink: 0;
+}
+
+.back-to-home-button:hover {
+  background: var(--bg-secondary);
+  color: var(--text-primary);
+  border-color: var(--interactive-primary);
+}
+
+.back-to-home-button:focus-visible {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 2px;
+}
+
+.back-icon {
+  width: 18px;
+  height: 18px;
+}
+
+.back-text {
+  /* Hide on very small screens */
 }
 
 @media (max-width: 600px) {
   .game-session {
-    padding: 1rem;
+    padding: var(--space-4);
+  }
+  
+  .game-session-header {
+    gap: var(--space-3);
+    margin-bottom: var(--space-4);
+  }
+  
+  .back-to-home-button {
+    padding: var(--space-2);
+  }
+  
+  .back-text {
+    display: none;
   }
 }

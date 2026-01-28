@@ -2,12 +2,14 @@
  * Card Component
  * Implements FR-2.1-2.4, FR-3.1-3.6
  * Phase 2: Enhanced animations, mastery badges
+ * Phase 4: Sound effects integration
  */
 
 import { useState, useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useGame } from '../context/GameContext';
 import { fuzzyMatch, getAllAnswers } from '../utils/fuzzyMatch';
+import { playCorrectSound, playIncorrectSound } from '../utils/audio';
 import './Card.css';
 
 /**
@@ -51,6 +53,13 @@ export default function Card({ question }) {
 
     // Trigger animation
     setAnimationClass(isCorrect ? 'card-success' : 'card-shake');
+
+    // Play sound effect
+    if (isCorrect) {
+      playCorrectSound();
+    } else {
+      playIncorrectSound();
+    }
 
     // Show feedback
     setFeedback({

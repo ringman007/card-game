@@ -2,12 +2,14 @@
  * Game Context for state management using React Context API
  * Phase 2: Added streak tracking and session statistics
  * Phase 3: Added practice mode, improve mode, session mode tracking
+ * Phase 4: Added achievements integration
  */
 
 import { createContext, useContext, useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { getSessionQuestions, getPracticeQuestions, getImproveQuestions, getAvailableRegions } from '../utils/questionSelector';
-import { updateQuestionProgress, getSettings, saveSettings, saveSessionStats, getStats } from '../utils/localStorage';
+import { updateQuestionProgress, getSettings, saveSettings, saveSessionStats, getStats, getUserProgress } from '../utils/localStorage';
+import { checkNewAchievements } from '../data/achievements';
 
 const GameContext = createContext();
 
@@ -25,6 +27,9 @@ export function GameProvider({ children }) {
   const [currentStreak, setCurrentStreak] = useState(0);
   const [bestSessionStreak, setBestSessionStreak] = useState(0);
   const [allTimeBestStreak, setAllTimeBestStreak] = useState(0);
+  
+  // Achievement notifications queue
+  const [pendingAchievements, setPendingAchievements] = useState([]);
 
   // Load settings on mount
   useEffect(() => {
@@ -134,6 +139,15 @@ export function GameProvider({ children }) {
         setAllTimeBestStreak(finalBestStreak);
       }
       
+      // Check for newly unlocked achievements
+      const stats = getStats();
+      const progress = getUserProgress();
+      const sessionData = { correct: correctCount, total: newAnswers.length };
+      const newAchievements = checkNewAchievements(stats, sessionData, progress);
+      if (newAchievements.length > 0) {
+        setPendingAchievements(prev => [...prev, ...newAchievements]);
+      }
+      
       setGameState('results');
     }
   };
@@ -146,6 +160,10 @@ export function GameProvider({ children }) {
     setCurrentStreak(0);
     setBestSessionStreak(0);
     setSessionMode('standard');
+  };
+
+  const dismissAchievement = () => {
+    setPendingAchievements(prev => prev.slice(1));
   };
 
   const value = {
@@ -169,7 +187,9 @@ export function GameProvider({ children }) {
     startPracticeMode,
     startImproveMode,
     submitAnswer,
-    returnToHome
+    returnToHome,
+    pendingAchievements,
+    dismissAchievement
   };
 
   return <GameContext.Provider value={value}>{children}</GameContext.Provider>;

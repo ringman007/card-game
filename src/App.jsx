@@ -2,17 +2,20 @@
  * Main App Component
  * Routes between different game states
  * Phase 3: Added accessibility features (skip nav, focus management)
+ * Phase 4: Added ThemeProvider for dark mode support, achievement toasts
  */
 
 import { useEffect, useRef } from 'react';
 import { GameProvider, useGame } from './context/GameContext';
+import { ThemeProvider } from './context/ThemeContext';
 import HomePage from './components/HomePage';
 import GameSession from './components/GameSession';
 import ResultsScreen from './components/ResultsScreen';
+import AchievementToast from './components/AchievementToast';
 import './App.css';
 
 function GameRouter() {
-  const { gameState } = useGame();
+  const { gameState, pendingAchievements, dismissAchievement } = useGame();
   const mainRef = useRef(null);
   const prevGameState = useRef(gameState);
 
@@ -62,18 +65,26 @@ function GameRouter() {
       style={{ outline: 'none' }}
     >
       {renderContent()}
+      {pendingAchievements.length > 0 && (
+        <AchievementToast 
+          achievement={pendingAchievements[0]} 
+          onDismiss={dismissAchievement} 
+        />
+      )}
     </main>
   );
 }
 
 function App() {
   return (
-    <GameProvider>
-      <a href="#main-content" className="skip-link">
-        Skip to main content
-      </a>
-      <GameRouter />
-    </GameProvider>
+    <ThemeProvider>
+      <GameProvider>
+        <a href="#main-content" className="skip-link">
+          Skip to main content
+        </a>
+        <GameRouter />
+      </GameProvider>
+    </ThemeProvider>
   );
 }
 

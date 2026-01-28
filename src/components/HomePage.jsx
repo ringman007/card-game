@@ -2,12 +2,16 @@
  * HomePage Component
  * Implements FR-1.1, FR-1.2, FR-7.1
  * Phase 3: Added Practice and Improve mode buttons, Stats Dashboard
+ * Phase 4: Added ThemeToggle and SoundToggle
  */
 
 import { useState } from 'react';
 import { useGame } from '../context/GameContext';
 import { getUserProgress, getStats } from '../utils/localStorage';
+import { initializeAudio } from '../utils/audio';
 import StatsDashboard from './StatsDashboard';
+import ThemeToggle from './ThemeToggle';
+import SoundToggle from './SoundToggle';
 import './HomePage.css';
 
 /**
@@ -37,20 +41,27 @@ export default function HomePage() {
   const canImprove = incorrectQuestions.length > 0;
 
   const handleStartGame = () => {
+    initializeAudio(); // Enable audio on user interaction
     startGame(selectedRegion, gameMode);
   };
 
   const handlePractice = () => {
+    initializeAudio();
     startPracticeMode(gameMode);
   };
 
   const handleImprove = () => {
+    initializeAudio();
     startImproveMode(gameMode);
   };
 
   return (
     <div className="home-page">
       <div className="home-container">
+        <div className="home-header-controls">
+          <SoundToggle />
+          <ThemeToggle />
+        </div>
         <div className="header">
           <div className="icon">🌍</div>
           <h1 className="title">World Capitals</h1>

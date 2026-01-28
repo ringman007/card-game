@@ -1,0 +1,289 @@
+/**
+ * Design System Tokens
+ * Phase 4: Warm Paper/Educational Theme
+ * 
+ * All visual styling uses these CSS custom properties.
+ * Dark mode overrides are defined in [data-theme="dark"]
+ */
+
+:root {
+  /* ========================================
+     COLOR PALETTE - Warm Paper Theme
+     ======================================== */
+  
+  /* Base Colors */
+  --color-cream-50: #FDFCFA;
+  --color-cream-100: #FAF8F5;
+  --color-cream-200: #F5F1EB;
+  --color-cream-300: #EBE5DB;
+  --color-cream-400: #DDD4C6;
+  
+  /* Text Colors */
+  --color-ink-900: #1A1714;
+  --color-ink-800: #2D2926;
+  --color-ink-700: #453E39;
+  --color-ink-600: #5C544D;
+  --color-ink-500: #7A716A;
+  --color-ink-400: #9B928A;
+  
+  /* Primary - Terracotta */
+  --color-terracotta-50: #FDF5F3;
+  --color-terracotta-100: #FAE8E3;
+  --color-terracotta-200: #F5CEC3;
+  --color-terracotta-300: #E8A899;
+  --color-terracotta-400: #D97B66;
+  --color-terracotta-500: #C45D3E;
+  --color-terracotta-600: #A84A30;
+  --color-terracotta-700: #8B3D28;
+  
+  /* Success - Forest Green */
+  --color-forest-50: #F2F7F4;
+  --color-forest-100: #E0EDE5;
+  --color-forest-200: #C3DCCC;
+  --color-forest-300: #96C4A6;
+  --color-forest-400: #6BA67D;
+  --color-forest-500: #4A7C59;
+  --color-forest-600: #3A6347;
+  --color-forest-700: #304F3A;
+  
+  /* Error - Muted Red */
+  --color-rust-50: #FDF6F5;
+  --color-rust-100: #FAE9E8;
+  --color-rust-200: #F4CFCC;
+  --color-rust-300: #E8A9A5;
+  --color-rust-400: #D4807A;
+  --color-rust-500: #B85450;
+  --color-rust-600: #9A4340;
+  --color-rust-700: #7D3735;
+  
+  /* Accent - Golden Amber */
+  --color-amber-50: #FFFCF5;
+  --color-amber-100: #FFF6E5;
+  --color-amber-200: #FFECC7;
+  --color-amber-300: #FFDEA3;
+  --color-amber-400: #E8C478;
+  --color-amber-500: #D4A84B;
+  --color-amber-600: #B8903D;
+  --color-amber-700: #957432;
+  
+  /* ========================================
+     SEMANTIC TOKENS - Light Theme
+     ======================================== */
+  
+  /* Backgrounds */
+  --bg-primary: var(--color-cream-100);
+  --bg-secondary: var(--color-cream-200);
+  --bg-card: var(--color-cream-50);
+  --bg-elevated: #FFFFFF;
+  --bg-overlay: rgba(45, 41, 38, 0.5);
+  
+  /* Text */
+  --text-primary: var(--color-ink-800);
+  --text-secondary: var(--color-ink-600);
+  --text-tertiary: var(--color-ink-500);
+  --text-inverse: var(--color-cream-100);
+  
+  /* Interactive */
+  --interactive-primary: var(--color-terracotta-500);
+  --interactive-primary-hover: var(--color-terracotta-600);
+  --interactive-primary-active: var(--color-terracotta-700);
+  --interactive-secondary: var(--color-ink-700);
+  --interactive-secondary-hover: var(--color-ink-800);
+  
+  /* Feedback */
+  --feedback-success: var(--color-forest-500);
+  --feedback-success-bg: var(--color-forest-100);
+  --feedback-success-border: var(--color-forest-300);
+  --feedback-error: var(--color-rust-500);
+  --feedback-error-bg: var(--color-rust-100);
+  --feedback-error-border: var(--color-rust-300);
+  --feedback-warning: var(--color-amber-500);
+  --feedback-warning-bg: var(--color-amber-100);
+  
+  /* Focus */
+  --focus-ring: var(--color-amber-500);
+  --focus-ring-offset: var(--bg-card);
+  
+  /* Borders */
+  --border-light: var(--color-cream-300);
+  --border-medium: var(--color-cream-400);
+  --border-dark: var(--color-ink-400);
+  
+  /* ========================================
+     TYPOGRAPHY
+     ======================================== */
+  
+  /* Font Families */
+  --font-display: 'Nunito', 'Quicksand', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+  --font-mono: 'SF Mono', 'Fira Code', 'Consolas', monospace;
+  
+  /* Font Sizes */
+  --text-xs: 0.75rem;      /* 12px */
+  --text-sm: 0.875rem;     /* 14px */
+  --text-base: 1rem;       /* 16px */
+  --text-lg: 1.125rem;     /* 18px */
+  --text-xl: 1.25rem;      /* 20px */
+  --text-2xl: 1.5rem;      /* 24px */
+  --text-3xl: 2rem;        /* 32px */
+  --text-4xl: 2.5rem;      /* 40px */
+  --text-5xl: 3rem;        /* 48px */
+  
+  /* Line Heights */
+  --leading-none: 1;
+  --leading-tight: 1.25;
+  --leading-snug: 1.375;
+  --leading-normal: 1.5;
+  --leading-relaxed: 1.625;
+  
+  /* Font Weights */
+  --font-normal: 400;
+  --font-medium: 500;
+  --font-semibold: 600;
+  --font-bold: 700;
+  
+  /* Letter Spacing */
+  --tracking-tight: -0.025em;
+  --tracking-normal: 0;
+  --tracking-wide: 0.025em;
+  
+  /* ========================================
+     SPACING (4px base unit)
+     ======================================== */
+  
+  --space-1: 0.25rem;   /* 4px */
+  --space-2: 0.5rem;    /* 8px */
+  --space-3: 0.75rem;   /* 12px */
+  --space-4: 1rem;      /* 16px */
+  --space-5: 1.25rem;   /* 20px */
+  --space-6: 1.5rem;    /* 24px */
+  --space-8: 2rem;      /* 32px */
+  --space-10: 2.5rem;   /* 40px */
+  --space-12: 3rem;     /* 48px */
+  --space-16: 4rem;     /* 64px */
+  --space-20: 5rem;     /* 80px */
+  --space-24: 6rem;     /* 96px */
+  
+  /* ========================================
+     SHADOWS (warm-tinted)
+     ======================================== */
+  
+  --shadow-xs: 0 1px 2px rgba(45, 41, 38, 0.05);
+  --shadow-sm: 0 2px 4px rgba(45, 41, 38, 0.08), 0 1px 2px rgba(45, 41, 38, 0.04);
+  --shadow-md: 0 4px 8px rgba(45, 41, 38, 0.1), 0 2px 4px rgba(45, 41, 38, 0.06);
+  --shadow-lg: 0 8px 24px rgba(45, 41, 38, 0.12), 0 4px 8px rgba(45, 41, 38, 0.08);
+  --shadow-xl: 0 16px 48px rgba(45, 41, 38, 0.16), 0 8px 16px rgba(45, 41, 38, 0.1);
+  --shadow-card: 0 4px 20px rgba(45, 41, 38, 0.08), 0 2px 6px rgba(45, 41, 38, 0.04);
+  --shadow-elevated: 0 12px 40px rgba(45, 41, 38, 0.15), 0 4px 12px rgba(45, 41, 38, 0.1);
+  
+  /* ========================================
+     BORDER RADIUS
+     ======================================== */
+  
+  --radius-sm: 0.375rem;   /* 6px */
+  --radius-md: 0.5rem;     /* 8px */
+  --radius-lg: 0.75rem;    /* 12px */
+  --radius-xl: 1rem;       /* 16px */
+  --radius-2xl: 1.5rem;    /* 24px */
+  --radius-full: 9999px;
+  
+  /* ========================================
+     ANIMATION
+     ======================================== */
+  
+  --duration-fast: 150ms;
+  --duration-normal: 250ms;
+  --duration-slow: 400ms;
+  --duration-slower: 600ms;
+  
+  --ease-out: cubic-bezier(0.33, 1, 0.68, 1);
+  --ease-in: cubic-bezier(0.32, 0, 0.67, 0);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --ease-bounce: cubic-bezier(0.34, 1.56, 0.64, 1);
+  
+  /* ========================================
+     Z-INDEX
+     ======================================== */
+  
+  --z-dropdown: 100;
+  --z-sticky: 200;
+  --z-modal: 300;
+  --z-toast: 400;
+  --z-tooltip: 500;
+}
+
+/* ========================================
+   DARK THEME OVERRIDES
+   ======================================== */
+
+[data-theme="dark"] {
+  /* Dark Base Colors */
+  --color-dark-900: #0F0E0D;
+  --color-dark-800: #1A1816;
+  --color-dark-700: #252220;
+  --color-dark-600: #322E2B;
+  --color-dark-500: #3F3A36;
+  --color-dark-400: #524C47;
+  
+  /* Backgrounds */
+  --bg-primary: var(--color-dark-800);
+  --bg-secondary: var(--color-dark-700);
+  --bg-card: var(--color-dark-600);
+  --bg-elevated: var(--color-dark-500);
+  --bg-overlay: rgba(0, 0, 0, 0.6);
+  
+  /* Text */
+  --text-primary: var(--color-cream-200);
+  --text-secondary: var(--color-cream-400);
+  --text-tertiary: var(--color-ink-400);
+  --text-inverse: var(--color-dark-900);
+  
+  /* Interactive - Lighter in dark mode */
+  --interactive-primary: var(--color-terracotta-400);
+  --interactive-primary-hover: var(--color-terracotta-300);
+  --interactive-primary-active: var(--color-terracotta-500);
+  
+  /* Feedback - Adjusted for dark */
+  --feedback-success: var(--color-forest-400);
+  --feedback-success-bg: rgba(74, 124, 89, 0.2);
+  --feedback-success-border: var(--color-forest-600);
+  --feedback-error: var(--color-rust-400);
+  --feedback-error-bg: rgba(184, 84, 80, 0.2);
+  --feedback-error-border: var(--color-rust-600);
+  --feedback-warning: var(--color-amber-400);
+  --feedback-warning-bg: rgba(212, 168, 75, 0.2);
+  
+  /* Focus */
+  --focus-ring: var(--color-amber-400);
+  --focus-ring-offset: var(--bg-card);
+  
+  /* Borders */
+  --border-light: var(--color-dark-500);
+  --border-medium: var(--color-dark-400);
+  --border-dark: var(--color-ink-500);
+  
+  /* Shadows - Darker and more subtle */
+  --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.2);
+  --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.25), 0 1px 2px rgba(0, 0, 0, 0.15);
+  --shadow-md: 0 4px 8px rgba(0, 0, 0, 0.3), 0 2px 4px rgba(0, 0, 0, 0.2);
+  --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.35), 0 4px 8px rgba(0, 0, 0, 0.25);
+  --shadow-xl: 0 16px 48px rgba(0, 0, 0, 0.4), 0 8px 16px rgba(0, 0, 0, 0.3);
+  --shadow-card: 0 4px 20px rgba(0, 0, 0, 0.25), 0 2px 6px rgba(0, 0, 0, 0.15);
+  --shadow-elevated: 0 12px 40px rgba(0, 0, 0, 0.4), 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* ========================================
+   UTILITY CLASSES
+   ======================================== */
+
+/* Theme transition for smooth switching */
+.theme-transition,
+.theme-transition *,
+.theme-transition *::before,
+.theme-transition *::after {
+  transition: 
+    background-color var(--duration-normal) var(--ease-out),
+    border-color var(--duration-normal) var(--ease-out),
+    color var(--duration-normal) var(--ease-out),
+    box-shadow var(--duration-normal) var(--ease-out) !important;
+}

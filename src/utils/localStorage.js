@@ -1,10 +1,27 @@
 /**
  * Local storage utility for persisting user progress
  * Implements FR-4.1, FR-4.2, FR-4.3
+ * Phase 2: SM-2 algorithm, difficulty buckets, streak tracking
  */
 
 const STORAGE_KEY = 'capitalCardGame_progress';
 const SETTINGS_KEY = 'capitalCardGame_settings';
+const STATS_KEY = 'capitalCardGame_stats';
+
+/**
+ * SM-2 Algorithm Constants
+ */
+const SM2_DEFAULT_EASE_FACTOR = 2.5;
+const SM2_MIN_EASE_FACTOR = 1.3;
+
+/**
+ * Difficulty bucket thresholds (in days)
+ */
+const BUCKET_THRESHOLDS = {
+  learning: 7,   // < 7 days = learning
+  review: 21,    // 7-21 days = review
+  // > 21 days = mastered
+};
 
 /**
  * Gets user progress data from local storage
@@ -31,7 +48,71 @@ export function saveUserProgress(progress) {
 }
 
 /**
- * Updates progress for a specific question
+ * Determines the difficulty bucket for a question
+ * @param {object} questionProgress - Progress data for the question
+ * @returns {string} - 'new', 'learning', 'review', or 'mastered'
+ */
+export function getBucketForQuestion(questionProgress) {
+  if (!questionProgress || questionProgress.timesShown === 0) {
+    return 'new';
+  }
+  
+  const interval = questionProgress.interval || 1;
+  
+  if (interval < BUCKET_THRESHOLDS.learning) {
+    return 'learning';
+  } else if (interval < BUCKET_THRESHOLDS.review) {
+    return 'review';
+  } else {
+    return 'mastered';
+  }
+}
+
+/**
+ * Calculates next review using SM-2 algorithm
+ * @param {object} questionProgress - Current progress data
+ * @param {boolean} isCorrect - Whether the answer was correct
+ * @param {number} quality - Response quality (0-5), default 4 for correct, 1 for incorrect
+ * @returns {object} - Updated SM-2 fields
+ */
+function calculateSM2(questionProgress, isCorrect, quality = null) {
+  // Default quality: 4 for correct (good recall), 1 for incorrect (complete failure)
+  const q = quality !== null ? quality : (isCorrect ? 4 : 1);
+  
+  let { easeFactor = SM2_DEFAULT_EASE_FACTOR, interval = 1, repetitions = 0 } = questionProgress;
+  
+  if (isCorrect) {
+    // Correct response
+    if (repetitions === 0) {
+      interval = 1;
+    } else if (repetitions === 1) {
+      interval = 6;
+    } else {
+      interval = Math.round(interval * easeFactor);
+    }
+    repetitions += 1;
+    
+    // Adjust ease factor based on quality
+    easeFactor = easeFactor + (0.1 - (5 - q) * (0.08 + (5 - q) * 0.02));
+  } else {
+    // Incorrect response - reset
+    repetitions = 0;
+    interval = 1;
+    easeFactor = easeFactor - 0.2;
+  }
+  
+  // Ensure ease factor doesn't go below minimum
+  easeFactor = Math.max(SM2_MIN_EASE_FACTOR, easeFactor);
+  
+  // Calculate next review date
+  const now = new Date();
+  const nextReview = new Date(now.getTime() + interval * 24 * 60 * 60 * 1000).toISOString();
+  
+  return { easeFactor, interval, repetitions, nextReview };
+}
+
+/**
+ * Updates progress for a specific question using SM-2 algorithm
  */
 export function updateQuestionProgress(questionId, isCorrect) {
   const progress = getUserProgress();
@@ -43,7 +124,10 @@ export function updateQuestionProgress(questionId, isCorrect) {
       incorrectCount: 0,
       lastShown: null,
       nextReview: null,
-      difficultyScore: 0.5
+      easeFactor: SM2_DEFAULT_EASE_FACTOR,
+      interval: 1,
+      repetitions: 0,
+      bucket: 'new'
     };
   }
   
@@ -57,37 +141,18 @@ export function updateQuestionProgress(questionId, isCorrect) {
     questionProgress.incorrectCount += 1;
   }
   
-  // Calculate difficulty score (0 = easy, 1 = hard)
-  const totalAttempts = questionProgress.correctCount + questionProgress.incorrectCount;
-  questionProgress.difficultyScore = totalAttempts > 0 
-    ? questionProgress.incorrectCount / totalAttempts 
-    : 0.5;
+  // Apply SM-2 algorithm
+  const sm2Result = calculateSM2(questionProgress, isCorrect);
+  questionProgress.easeFactor = sm2Result.easeFactor;
+  questionProgress.interval = sm2Result.interval;
+  questionProgress.repetitions = sm2Result.repetitions;
+  questionProgress.nextReview = sm2Result.nextReview;
   
-  // Calculate next review date using spaced repetition
-  questionProgress.nextReview = calculateNextReview(questionProgress);
+  // Update bucket
+  questionProgress.bucket = getBucketForQuestion(questionProgress);
   
   saveUserProgress(progress);
   return progress;
-}
-
-/**
- * Calculates next review date based on performance
- * Implements simplified spaced repetition algorithm
- */
-function calculateNextReview(questionProgress) {
-  const now = new Date();
-  
-  if (questionProgress.incorrectCount === 0 && questionProgress.correctCount > 0) {
-    // Never got it wrong - schedule far in future
-    const interval = Math.min(questionProgress.correctCount, 10) * 24 * 60 * 60 * 1000; // Days in ms
-    return new Date(now.getTime() + interval).toISOString();
-  } else if (questionProgress.difficultyScore > 0.5) {
-    // Difficult question - review soon
-    return new Date(now.getTime() + 60 * 60 * 1000).toISOString(); // 1 hour
-  } else {
-    // Medium difficulty
-    return new Date(now.getTime() + 24 * 60 * 60 * 1000).toISOString(); // 1 day
-  }
 }
 
 /**
@@ -96,10 +161,10 @@ function calculateNextReview(questionProgress) {
 export function getSettings() {
   try {
     const data = localStorage.getItem(SETTINGS_KEY);
-    return data ? JSON.parse(data) : { lastRegion: 'World' };
+    return data ? JSON.parse(data) : { lastRegion: 'World', lastMode: 'countryToCapital' };
   } catch (error) {
     console.error('Error reading settings:', error);
-    return { lastRegion: 'World' };
+    return { lastRegion: 'World', lastMode: 'countryToCapital' };
   }
 }
 
@@ -108,9 +173,62 @@ export function getSettings() {
  */
 export function saveSettings(settings) {
   try {
-    localStorage.setItem(SETTINGS_KEY, JSON.stringify(settings));
+    const current = getSettings();
+    localStorage.setItem(SETTINGS_KEY, JSON.stringify({ ...current, ...settings }));
   } catch (error) {
     console.error('Error saving settings:', error);
+  }
+}
+
+/**
+ * Gets user statistics from local storage
+ */
+export function getStats() {
+  try {
+    const data = localStorage.getItem(STATS_KEY);
+    return data ? JSON.parse(data) : {
+      bestStreak: 0,
+      totalSessions: 0,
+      totalCorrect: 0,
+      totalIncorrect: 0,
+      sessionHistory: []
+    };
+  } catch (error) {
+    console.error('Error reading stats:', error);
+    return { bestStreak: 0, totalSessions: 0, totalCorrect: 0, totalIncorrect: 0, sessionHistory: [] };
+  }
+}
+
+/**
+ * Saves session statistics
+ */
+export function saveSessionStats(sessionData) {
+  try {
+    const stats = getStats();
+    
+    // Update totals
+    stats.totalSessions += 1;
+    stats.totalCorrect += sessionData.correctCount;
+    stats.totalIncorrect += sessionData.incorrectCount;
+    
+    // Update best streak
+    if (sessionData.bestStreak > stats.bestStreak) {
+      stats.bestStreak = sessionData.bestStreak;
+    }
+    
+    // Add to session history (keep last 10)
+    stats.sessionHistory.unshift({
+      date: new Date().toISOString(),
+      correctCount: sessionData.correctCount,
+      incorrectCount: sessionData.incorrectCount,
+      accuracy: sessionData.correctCount / (sessionData.correctCount + sessionData.incorrectCount),
+      bestStreak: sessionData.bestStreak
+    });
+    stats.sessionHistory = stats.sessionHistory.slice(0, 10);
+    
+    localStorage.setItem(STATS_KEY, JSON.stringify(stats));
+  } catch (error) {
+    console.error('Error saving session stats:', error);
   }
 }
 
@@ -120,6 +238,7 @@ export function saveSettings(settings) {
 export function clearProgress() {
   try {
     localStorage.removeItem(STORAGE_KEY);
+    localStorage.removeItem(STATS_KEY);
   } catch (error) {
     console.error('Error clearing progress:', error);
   }

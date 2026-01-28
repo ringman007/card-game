@@ -8,6 +8,53 @@
   transition: transform 0.2s ease;
 }
 
+/* Card entrance animation */
+.card.card-enter {
+  animation: cardEnter 0.3s ease-out;
+}
+
+@keyframes cardEnter {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Success celebration animation */
+.card.card-success {
+  animation: cardSuccess 0.4s ease;
+}
+
+@keyframes cardSuccess {
+  0% { transform: scale(1); }
+  15% { transform: scale(1.02); }
+  30% { transform: scale(0.98); }
+  45% { transform: scale(1.01); }
+  60% { transform: scale(0.99); }
+  100% { transform: scale(1); }
+}
+
+/* Shake animation for incorrect answers */
+.card.card-shake {
+  animation: cardShake 0.4s ease;
+}
+
+@keyframes cardShake {
+  0%, 100% { transform: translateX(0); }
+  10% { transform: translateX(-8px); }
+  20% { transform: translateX(8px); }
+  30% { transform: translateX(-6px); }
+  40% { transform: translateX(6px); }
+  50% { transform: translateX(-4px); }
+  60% { transform: translateX(4px); }
+  70% { transform: translateX(-2px); }
+  80% { transform: translateX(2px); }
+}
+
 .card.showing-feedback {
   animation: pulse 0.3s ease;
 }
@@ -15,6 +62,50 @@
 @keyframes pulse {
   0%, 100% { transform: scale(1); }
   50% { transform: scale(0.98); }
+}
+
+/* Card header with mastery badge and streak */
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.mastery-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.35rem 0.75rem;
+  border-radius: 20px;
+  color: white;
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.badge-emoji {
+  font-size: 0.9rem;
+}
+
+.badge-label {
+  font-size: 0.75rem;
+}
+
+.streak-indicator {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #f59e0b;
+  animation: streakPulse 1s ease-in-out infinite;
+}
+
+@keyframes streakPulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
 }
 
 .card-content {
@@ -101,6 +192,8 @@
   transition: all 0.3s;
   font-family: inherit;
   box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+  /* Minimum touch target for mobile */
+  min-height: 48px;
 }
 
 .submit-button:hover:not(:disabled) {
@@ -168,16 +261,52 @@
   font-weight: bold;
 }
 
+/* Mobile responsiveness */
 @media (max-width: 600px) {
   .card {
-    padding: 2rem 1.5rem;
+    padding: 1.5rem 1rem;
+    border-radius: 16px;
+  }
+
+  .card-header {
+    margin-bottom: 1rem;
+  }
+
+  .mastery-badge {
+    padding: 0.3rem 0.6rem;
+  }
+
+  .badge-label {
+    display: none;
+  }
+
+  .question-display {
+    padding: 1rem;
   }
 
   .question-text {
-    font-size: 2rem;
+    font-size: 1.75rem;
   }
 
   .answer-input {
     font-size: 1rem;
+    padding: 1rem;
+    /* Minimum touch target */
+    min-height: 48px;
+  }
+
+  .submit-button {
+    padding: 1rem 1.5rem;
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 400px) {
+  .question-text {
+    font-size: 1.5rem;
+  }
+
+  .prompt-text {
+    font-size: 0.85rem;
   }
 }

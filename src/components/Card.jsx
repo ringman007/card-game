@@ -1,6 +1,7 @@
 /**
  * Card Component
  * Implements FR-2.1-2.4, FR-3.1-3.6
+ * Phase 2: Enhanced animations, mastery badges
  */
 
 import { useState, useRef, useEffect } from 'react';
@@ -9,11 +10,22 @@ import { useGame } from '../context/GameContext';
 import { fuzzyMatch, getAllAnswers } from '../utils/fuzzyMatch';
 import './Card.css';
 
+/**
+ * Bucket badge colors and labels
+ */
+const BUCKET_CONFIG = {
+  new: { label: 'New', color: '#6b7280', emoji: '🆕' },
+  learning: { label: 'Learning', color: '#f59e0b', emoji: '📚' },
+  review: { label: 'Review', color: '#3b82f6', emoji: '🔄' },
+  mastered: { label: 'Mastered', color: '#10b981', emoji: '⭐' }
+};
+
 export default function Card({ question }) {
-  const { submitAnswer } = useGame();
+  const { submitAnswer, currentStreak } = useGame();
   const [userAnswer, setUserAnswer] = useState('');
   const [feedback, setFeedback] = useState(null);
   const [showingFeedback, setShowingFeedback] = useState(false);
+  const [animationClass, setAnimationClass] = useState('');
   const inputRef = useRef(null);
 
   // Focus input when card loads
@@ -22,6 +34,11 @@ export default function Card({ question }) {
     setUserAnswer('');
     setFeedback(null);
     setShowingFeedback(false);
+    setAnimationClass('card-enter');
+    
+    // Remove entrance animation class after it plays
+    const timer = setTimeout(() => setAnimationClass(''), 300);
+    return () => clearTimeout(timer);
   }, [question]);
 
   const handleSubmit = (e) => {
@@ -31,6 +48,9 @@ export default function Card({ question }) {
 
     const correctAnswers = getAllAnswers(question);
     const isCorrect = fuzzyMatch(userAnswer, correctAnswers);
+
+    // Trigger animation
+    setAnimationClass(isCorrect ? 'card-success' : 'card-shake');
 
     // Show feedback
     setFeedback({
@@ -81,8 +101,26 @@ export default function Card({ question }) {
     return helpers;
   };
 
+  const bucketInfo = BUCKET_CONFIG[question.bucket] || BUCKET_CONFIG.new;
+
   return (
-    <div className={`card ${showingFeedback ? 'showing-feedback' : ''}`}>
+    <div className={`card ${showingFeedback ? 'showing-feedback' : ''} ${animationClass}`}>
+      <div className="card-header">
+        <div 
+          className="mastery-badge"
+          style={{ backgroundColor: bucketInfo.color }}
+          title={bucketInfo.label}
+        >
+          <span className="badge-emoji">{bucketInfo.emoji}</span>
+          <span className="badge-label">{bucketInfo.label}</span>
+        </div>
+        {currentStreak >= 3 && (
+          <div className="streak-indicator">
+            🔥 {currentStreak}
+          </div>
+        )}
+      </div>
+      
       <div className="card-content">
         <div className="question-display">
           <div className="prompt-text">{getPromptText()}</div>
@@ -154,6 +192,7 @@ Card.propTypes = {
     capital: PropTypes.string.isRequired,
     capitalAlternatives: PropTypes.arrayOf(PropTypes.string).isRequired,
     multipleCapitals: PropTypes.bool.isRequired,
-    region: PropTypes.string.isRequired
+    region: PropTypes.string.isRequired,
+    bucket: PropTypes.string
   }).isRequired
 };

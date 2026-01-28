@@ -8,12 +8,74 @@
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
 }
 
+.progress-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.75rem;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.progress-left {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
 .progress-text {
-  text-align: center;
   font-size: 0.95rem;
   color: #667eea;
-  margin-bottom: 0.75rem;
   font-weight: 600;
+}
+
+.region-badge {
+  font-size: 0.75rem;
+  color: #6b7280;
+  background: #f3f4f6;
+  padding: 0.2rem 0.5rem;
+  border-radius: 6px;
+  font-weight: 500;
+}
+
+.mode-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  font-size: 0.75rem;
+  color: white;
+  padding: 0.2rem 0.5rem;
+  border-radius: 6px;
+  font-weight: 600;
+}
+
+.session-stats {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.streak-display {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #f59e0b;
+  animation: streakGlow 1.5s ease-in-out infinite;
+}
+
+@keyframes streakGlow {
+  0%, 100% { 
+    text-shadow: 0 0 4px rgba(245, 158, 11, 0.3);
+  }
+  50% { 
+    text-shadow: 0 0 8px rgba(245, 158, 11, 0.6);
+  }
+}
+
+.accuracy-display {
+  font-size: 0.85rem;
+  color: #6b7280;
+  font-weight: 500;
 }
 
 .progress-bar {
@@ -29,4 +91,21 @@
   background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
   transition: width 0.4s ease;
   box-shadow: 0 0 10px rgba(102, 126, 234, 0.5);
+}
+
+@media (max-width: 600px) {
+  .progress-indicator {
+    padding: 0.75rem 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .progress-header {
+    flex-direction: column;
+    gap: 0.5rem;
+    align-items: center;
+  }
+
+  .session-stats {
+    gap: 1rem;
+  }
 }

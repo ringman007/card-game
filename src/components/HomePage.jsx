@@ -1,16 +1,51 @@
 /**
  * HomePage Component
- * Implements FR-1.1, FR-1.2
+ * Implements FR-1.1, FR-1.2, FR-7.1
+ * Phase 3: Added Practice and Improve mode buttons, Stats Dashboard
  */
 
+import { useState } from 'react';
 import { useGame } from '../context/GameContext';
+import { getUserProgress, getStats } from '../utils/localStorage';
+import StatsDashboard from './StatsDashboard';
 import './HomePage.css';
 
+/**
+ * Region emoji mapping for visual differentiation
+ */
+const REGION_EMOJI = {
+  'World': '🌎',
+  'Africa': '🌍',
+  'Asia': '🌏',
+  'Europe': '🇪🇺',
+  'North America': '🌎',
+  'South America': '🌎',
+  'Oceania': '🌊'
+};
+
 export default function HomePage() {
-  const { selectedRegion, setSelectedRegion, gameMode, setGameMode, availableRegions, startGame } = useGame();
+  const { selectedRegion, setSelectedRegion, gameMode, setGameMode, availableRegions, startGame, startPracticeMode, startImproveMode } = useGame();
+  const [showStats, setShowStats] = useState(false);
+  
+  // Check if practice/improve modes are available
+  const progress = getUserProgress();
+  const stats = getStats();
+  const answeredCount = Object.keys(progress).filter(id => progress[id].timesShown > 0).length;
+  const incorrectQuestions = Object.entries(progress).filter(([, p]) => p.incorrectCount > 0);
+  
+  const canPractice = answeredCount > 0;
+  const canImprove = incorrectQuestions.length > 0;
 
   const handleStartGame = () => {
     startGame(selectedRegion, gameMode);
+  };
+
+  const handlePractice = () => {
+    startPracticeMode(gameMode);
+  };
+
+  const handleImprove = () => {
+    startImproveMode(gameMode);
   };
 
   return (
@@ -36,6 +71,32 @@ export default function HomePage() {
             <span>Track your progress</span>
           </div>
         </div>
+
+        {/* Stats preview */}
+        {stats.totalSessions > 0 && (
+          <div 
+            className="stats-preview clickable"
+            onClick={() => setShowStats(true)}
+            role="button"
+            tabIndex={0}
+            onKeyDown={(e) => e.key === 'Enter' && setShowStats(true)}
+            aria-label="View detailed statistics"
+          >
+            <div className="stat-item">
+              <span className="stat-value">{stats.totalSessions}</span>
+              <span className="stat-label">Sessions</span>
+            </div>
+            <div className="stat-item">
+              <span className="stat-value">{Math.round((stats.totalCorrect / (stats.totalCorrect + stats.totalIncorrect)) * 100)}%</span>
+              <span className="stat-label">Accuracy</span>
+            </div>
+            <div className="stat-item">
+              <span className="stat-value">🔥 {stats.bestStreak}</span>
+              <span className="stat-label">Best Streak</span>
+            </div>
+            <div className="stats-preview-hint">Tap for details</div>
+          </div>
+        )}
 
         <div className="settings-container">
           <div className="setting-group">
@@ -75,22 +136,52 @@ export default function HomePage() {
             >
               {availableRegions.map(region => (
                 <option key={region} value={region}>
-                  {region === 'World' ? '🌎 ' : '📍 '}{region}
+                  {REGION_EMOJI[region] || '📍'} {region}
                 </option>
               ))}
             </select>
           </div>
         </div>
 
-        <button 
-          onClick={handleStartGame}
-          className="start-button"
-          aria-label="Start game session"
-        >
-          <span>Start Learning</span>
-          <span className="button-icon">→</span>
-        </button>
+        <div className="action-buttons">
+          <button 
+            onClick={handleStartGame}
+            className="start-button"
+            aria-label="Start game session"
+          >
+            <span>Start Learning</span>
+            <span className="button-icon">→</span>
+          </button>
+
+          <div className="secondary-buttons">
+            <button 
+              onClick={handlePractice}
+              className="practice-button"
+              disabled={!canPractice}
+              title={canPractice ? 'Practice previously answered questions' : 'Answer some questions first'}
+              aria-label="Start practice mode"
+            >
+              <span className="button-emoji">📚</span>
+              <span>Practice</span>
+            </button>
+
+            <button 
+              onClick={handleImprove}
+              className="improve-button"
+              disabled={!canImprove}
+              title={canImprove ? `Review ${incorrectQuestions.length} incorrect answers` : 'No incorrect answers to review'}
+              aria-label="Start improve mode"
+            >
+              <span className="button-emoji">🎯</span>
+              <span>Improve</span>
+              {canImprove && <span className="badge">{incorrectQuestions.length}</span>}
+            </button>
+          </div>
+        </div>
       </div>
+
+      {/* Stats Dashboard Modal */}
+      {showStats && <StatsDashboard onClose={() => setShowStats(false)} />}
     </div>
   );
 }

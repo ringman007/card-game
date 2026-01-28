@@ -1,22 +1,30 @@
 /**
  * Game Context for state management using React Context API
+ * Phase 2: Added streak tracking and session statistics
+ * Phase 3: Added practice mode, improve mode, session mode tracking
  */
 
 import { createContext, useContext, useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { getSessionQuestions, getAvailableRegions } from '../utils/questionSelector';
-import { updateQuestionProgress, getSettings, saveSettings } from '../utils/localStorage';
+import { getSessionQuestions, getPracticeQuestions, getImproveQuestions, getAvailableRegions } from '../utils/questionSelector';
+import { updateQuestionProgress, getSettings, saveSettings, saveSessionStats, getStats } from '../utils/localStorage';
 
 const GameContext = createContext();
 
 export function GameProvider({ children }) {
   const [gameState, setGameState] = useState('home'); // 'home', 'playing', 'results'
+  const [sessionMode, setSessionMode] = useState('standard'); // 'standard', 'practice', 'improve'
   const [selectedRegion, setSelectedRegion] = useState('World');
   const [gameMode, setGameMode] = useState('countryToCapital'); // 'countryToCapital' or 'capitalToCountry'
   const [questions, setQuestions] = useState([]);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [answers, setAnswers] = useState([]);
   const [availableRegions, setAvailableRegions] = useState([]);
+  
+  // Streak tracking
+  const [currentStreak, setCurrentStreak] = useState(0);
+  const [bestSessionStreak, setBestSessionStreak] = useState(0);
+  const [allTimeBestStreak, setAllTimeBestStreak] = useState(0);
 
   // Load settings on mount
   useEffect(() => {
@@ -24,6 +32,10 @@ export function GameProvider({ children }) {
     setSelectedRegion(settings.lastRegion || 'World');
     setGameMode(settings.lastMode || 'countryToCapital');
     setAvailableRegions(getAvailableRegions());
+    
+    // Load best streak from stats
+    const stats = getStats();
+    setAllTimeBestStreak(stats.bestStreak || 0);
   }, []);
 
   const startGame = (region, mode) => {
@@ -31,6 +43,9 @@ export function GameProvider({ children }) {
     setQuestions(sessionQuestions);
     setCurrentQuestionIndex(0);
     setAnswers([]);
+    setCurrentStreak(0);
+    setBestSessionStreak(0);
+    setSessionMode('standard');
     setGameState('playing');
     setSelectedRegion(region);
     setGameMode(mode);
@@ -39,18 +54,62 @@ export function GameProvider({ children }) {
     saveSettings({ lastRegion: region, lastMode: mode });
   };
 
+  const startPracticeMode = (mode) => {
+    const practiceQuestions = getPracticeQuestions(10, mode);
+    if (practiceQuestions.length === 0) {
+      return; // No questions available
+    }
+    setQuestions(practiceQuestions);
+    setCurrentQuestionIndex(0);
+    setAnswers([]);
+    setCurrentStreak(0);
+    setBestSessionStreak(0);
+    setSessionMode('practice');
+    setGameState('playing');
+    setGameMode(mode);
+  };
+
+  const startImproveMode = (mode) => {
+    const improveQuestions = getImproveQuestions(10, mode);
+    if (improveQuestions.length === 0) {
+      return; // No incorrect questions available
+    }
+    setQuestions(improveQuestions);
+    setCurrentQuestionIndex(0);
+    setAnswers([]);
+    setCurrentStreak(0);
+    setBestSessionStreak(0);
+    setSessionMode('improve');
+    setGameState('playing');
+    setGameMode(mode);
+  };
+
   const submitAnswer = (userAnswer, isCorrect) => {
     const currentQuestion = questions[currentQuestionIndex];
+    
+    // Update streak
+    let newStreak = currentStreak;
+    if (isCorrect) {
+      newStreak = currentStreak + 1;
+      setCurrentStreak(newStreak);
+      if (newStreak > bestSessionStreak) {
+        setBestSessionStreak(newStreak);
+      }
+    } else {
+      setCurrentStreak(0);
+    }
     
     // Record answer
     const answerRecord = {
       question: currentQuestion,
       userAnswer,
       isCorrect,
+      streakAtTime: newStreak,
       timestamp: new Date().toISOString()
     };
     
-    setAnswers([...answers, answerRecord]);
+    const newAnswers = [...answers, answerRecord];
+    setAnswers(newAnswers);
     
     // Update progress in local storage
     updateQuestionProgress(currentQuestion.id, isCorrect);
@@ -59,6 +118,22 @@ export function GameProvider({ children }) {
     if (currentQuestionIndex < questions.length - 1) {
       setCurrentQuestionIndex(currentQuestionIndex + 1);
     } else {
+      // End of session - save stats
+      const correctCount = newAnswers.filter(a => a.isCorrect).length;
+      const incorrectCount = newAnswers.filter(a => !a.isCorrect).length;
+      const finalBestStreak = isCorrect && newStreak > bestSessionStreak ? newStreak : bestSessionStreak;
+      
+      saveSessionStats({
+        correctCount,
+        incorrectCount,
+        bestStreak: finalBestStreak
+      });
+      
+      // Update all-time best if needed
+      if (finalBestStreak > allTimeBestStreak) {
+        setAllTimeBestStreak(finalBestStreak);
+      }
+      
       setGameState('results');
     }
   };
@@ -68,10 +143,14 @@ export function GameProvider({ children }) {
     setQuestions([]);
     setCurrentQuestionIndex(0);
     setAnswers([]);
+    setCurrentStreak(0);
+    setBestSessionStreak(0);
+    setSessionMode('standard');
   };
 
   const value = {
     gameState,
+    sessionMode,
     selectedRegion,
     setSelectedRegion,
     gameMode,
@@ -81,7 +160,14 @@ export function GameProvider({ children }) {
     currentQuestion: questions[currentQuestionIndex],
     answers,
     availableRegions,
+    currentStreak,
+    bestSessionStreak,
+    allTimeBestStreak,
+    sessionCorrect: answers.filter(a => a.isCorrect).length,
+    sessionAnswered: answers.length,
     startGame,
+    startPracticeMode,
+    startImproveMode,
     submitAnswer,
     returnToHome
   };

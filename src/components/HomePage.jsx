@@ -4,6 +4,7 @@
  * Phase 3: Added Practice and Improve mode buttons, Stats Dashboard
  * Phase 4: Added ThemeToggle and SoundToggle
  * Phase 5: Added Study Mode for flashcard learning
+ * Phase 6: Added Memory Palace gallery button
  */
 
 import { useState } from 'react';
@@ -16,6 +17,7 @@ import ThemeToggle from './ThemeToggle';
 import SoundToggle from './SoundToggle';
 import StudyMode from './StudyMode';
 import ProgressMap from './ProgressMap';
+import MemoryPalace from './MemoryPalace';
 import './HomePage.css';
 
 /**
@@ -35,6 +37,7 @@ export default function HomePage() {
   const { selectedRegion, setSelectedRegion, gameMode, setGameMode, availableRegions, startGame, startPracticeMode, startImproveMode } = useGame();
   const [showStats, setShowStats] = useState(false);
   const [showProgressMap, setShowProgressMap] = useState(false);
+  const [showMemoryPalace, setShowMemoryPalace] = useState(false);
   const [studyModeCards, setStudyModeCards] = useState(null);
   
   // Check if practice/improve modes are available
@@ -71,6 +74,13 @@ export default function HomePage() {
   const handleExitStudy = () => {
     setStudyModeCards(null);
   };
+
+  // Show Memory Palace if active (full-screen takeover like Study Mode)
+  if (showMemoryPalace) {
+    return (
+      <MemoryPalace onExit={() => setShowMemoryPalace(false)} />
+    );
+  }
 
   // Show study mode if active
   if (studyModeCards) {
@@ -238,6 +248,16 @@ export default function HomePage() {
               <span className="button-emoji">🎯</span>
               <span>Improve</span>
               {canImprove && <span className="badge">{incorrectQuestions.length}</span>}
+            </button>
+
+            <button 
+              onClick={() => setShowMemoryPalace(true)}
+              className="memory-palace-button"
+              title="Browse absurd memory tricks for every capital"
+              aria-label="Open Memory Palace gallery"
+            >
+              <span className="button-emoji">🧠</span>
+              <span>Memory Palace</span>
             </button>
           </div>
         </div>

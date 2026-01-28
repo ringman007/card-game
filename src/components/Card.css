@@ -432,3 +432,89 @@
   color: var(--text-tertiary);
   font-style: italic;
 }
+
+/* ========================================
+   MEMORY SENTENCE - Phase 6
+   ======================================== */
+
+.memory-sentence {
+  margin-top: var(--space-4);
+  padding: var(--space-4);
+  background: linear-gradient(135deg, var(--color-purple-50) 0%, var(--color-indigo-50) 100%);
+  border: 2px solid var(--color-purple-200);
+  border-radius: var(--radius-lg);
+  animation: memorySentenceEnter 0.5s ease-out;
+}
+
+@keyframes memorySentenceEnter {
+  from {
+    opacity: 0;
+    transform: translateY(10px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.memory-sentence-header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin-bottom: var(--space-3);
+}
+
+.memory-icon {
+  font-size: 1.25rem;
+  animation: brainPulse 2s ease-in-out infinite;
+}
+
+@keyframes brainPulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+}
+
+.memory-label {
+  font-size: var(--text-sm);
+  font-weight: var(--font-bold);
+  color: var(--color-purple-700);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-wide);
+}
+
+.memory-sentence-text {
+  font-size: var(--text-base);
+  line-height: var(--leading-relaxed);
+  color: var(--color-purple-900);
+  margin: 0;
+}
+
+.memory-highlight {
+  font-weight: var(--font-bold);
+  color: var(--color-purple-600);
+  background: var(--color-purple-100);
+  padding: 0.1em 0.3em;
+  border-radius: var(--radius-sm);
+  text-transform: uppercase;
+}
+
+/* Dark mode support for memory sentence */
+@media (prefers-color-scheme: dark) {
+  .memory-sentence {
+    background: linear-gradient(135deg, rgba(139, 92, 246, 0.15) 0%, rgba(99, 102, 241, 0.15) 100%);
+    border-color: var(--color-purple-400);
+  }
+
+  .memory-label {
+    color: var(--color-purple-300);
+  }
+
+  .memory-sentence-text {
+    color: var(--color-purple-100);
+  }
+
+  .memory-highlight {
+    color: var(--color-purple-200);
+    background: rgba(139, 92, 246, 0.3);
+  }
+}

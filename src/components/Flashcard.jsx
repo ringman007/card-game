@@ -2,10 +2,12 @@
  * Flashcard Component
  * Interactive flashcard for study mode - flip to reveal answer
  * Phase 5: Learning Enhancements
+ * Phase 6: Memory sentence on card back
  */
 
 import { useState, useEffect, useCallback } from 'react';
 import PropTypes from 'prop-types';
+import { getMemorySentence, formatSentenceWithHighlights } from '../utils/memorySentences';
 import './Flashcard.css';
 
 export default function Flashcard({ card, gameMode, onKnew, onDidntKnow, onNext }) {
@@ -62,6 +64,9 @@ export default function Flashcard({ card, gameMode, onKnew, onDidntKnow, onNext 
   const frontLabel = gameMode === 'countryToCapital' ? 'Country' : 'Capital';
   const backLabel = gameMode === 'countryToCapital' ? 'Capital' : 'Country';
 
+  // Get memory sentence for this card
+  const memorySentence = getMemorySentence(card.id);
+
   return (
     <div className="flashcard-container">
       <div 
@@ -82,6 +87,28 @@ export default function Flashcard({ card, gameMode, onKnew, onDidntKnow, onNext 
             <div className="flashcard-label">{backLabel}</div>
             <div className="flashcard-content">{backContent}</div>
             <div className="flashcard-region">{card.region}</div>
+            
+            {/* Memory Sentence - Phase 6 */}
+            {memorySentence && (
+              <div className="flashcard-memory">
+                <div className="memory-header">
+                  <span className="memory-icon">🧠</span>
+                  <span className="memory-title">Memory Trick</span>
+                </div>
+                <p className="memory-text">
+                  {formatSentenceWithHighlights(
+                    memorySentence.sentence,
+                    memorySentence.highlightedWords
+                  ).map((part) => (
+                    part.isHighlight ? (
+                      <span key={part.key} className="memory-highlight">{part.text}</span>
+                    ) : (
+                      <span key={part.key}>{part.text}</span>
+                    )
+                  ))}
+                </p>
+              </div>
+            )}
           </div>
         </div>
       </div>

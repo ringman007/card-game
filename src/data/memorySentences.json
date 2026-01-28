@@ -1,0 +1,527 @@
+{
+  "FRA": {
+    "sentence": "A PAIR of FRANCE-enstein monsters dance the can-can on the Eiffel Tower",
+    "highlightedWords": ["PAIR", "FRANCE"],
+    "region": "Europe"
+  },
+  "DEU": {
+    "sentence": "A grizzly BEAR is LINe-dancing with sausages across GERMANY",
+    "highlightedWords": ["BEAR", "LIN", "GERMANY"],
+    "region": "Europe"
+  },
+  "ESP": {
+    "sentence": "A MAD RIDiculous bull is doing flamenco in SPAIN",
+    "highlightedWords": ["MAD", "RID", "SPAIN"],
+    "region": "Europe"
+  },
+  "ITA": {
+    "sentence": "A giant pizza is ROAMing around ITALY eating tourists",
+    "highlightedWords": ["ROAM", "ITALY"],
+    "region": "Europe"
+  },
+  "PRT": {
+    "sentence": "LIZ the BONkers mermaid surfs through PORTUGAL",
+    "highlightedWords": ["LIZ", "BON", "PORTUGAL"],
+    "region": "Europe"
+  },
+  "GBR": {
+    "sentence": "A LONely DONkey wearing a crown sips tea in the UNITED KINGDOM",
+    "highlightedWords": ["LON", "DON", "UNITED KINGDOM"],
+    "region": "Europe"
+  },
+  "NLD": {
+    "sentence": "HAMSTER in a DAM eating cheese while riding a windmill in the NETHERLANDS",
+    "highlightedWords": ["HAMSTER", "DAM", "NETHERLANDS"],
+    "region": "Europe"
+  },
+  "BEL": {
+    "sentence": "BRUSSEL sprouts are SELing waffles to confused tourists in BELGIUM",
+    "highlightedWords": ["BRUSSEL", "SEL", "BELGIUM"],
+    "region": "Europe"
+  },
+  "AUT": {
+    "sentence": "A VI-king playing ENNis with Mozart in AUSTRIA",
+    "highlightedWords": ["VI", "ENN", "AUSTRIA"],
+    "region": "Europe"
+  },
+  "CHE": {
+    "sentence": "A BEAR wearing a BERN-ie hat makes chocolate in SWITZERLAND",
+    "highlightedWords": ["BEAR", "BERN", "SWITZERLAND"],
+    "region": "Europe"
+  },
+  "GRC": {
+    "sentence": "ATHENA is throwing lightning bolts at tourists in GREECE",
+    "highlightedWords": ["ATHENA", "GREECE"],
+    "region": "Europe"
+  },
+  "POL": {
+    "sentence": "A WAR-rior SAW a pierogi and started dancing in POLAND",
+    "highlightedWords": ["WAR", "SAW", "POLAND"],
+    "region": "Europe"
+  },
+  "CZE": {
+    "sentence": "A magical FROG is in PRAGUE making beer disappear in the CZECH REPUBLIC",
+    "highlightedWords": ["FROG", "PRAGUE", "CZECH"],
+    "region": "Europe"
+  },
+  "HUN": {
+    "sentence": "BUDDHA ate PEST control for dinner in HUNGARY",
+    "highlightedWords": ["BUDDHA", "PEST", "HUNGARY"],
+    "region": "Europe"
+  },
+  "SWE": {
+    "sentence": "A SOCK fell in HOLM-es' mystery in SWEDEN",
+    "highlightedWords": ["SOCK", "HOLM", "SWEDEN"],
+    "region": "Europe"
+  },
+  "NOR": {
+    "sentence": "Oh SLO down! Vikings are skiing through NORWAY",
+    "highlightedWords": ["SLO", "NORWAY"],
+    "region": "Europe"
+  },
+  "DNK": {
+    "sentence": "COPE-ing with a HAGon is hard when you're a mermaid in DENMARK",
+    "highlightedWords": ["COPE", "HAG", "DENMARK"],
+    "region": "Europe"
+  },
+  "FIN": {
+    "sentence": "HELp! SINKING in a sauna in FINLAND",
+    "highlightedWords": ["HEL", "SINK", "FINLAND"],
+    "region": "Europe"
+  },
+  "IRL": {
+    "sentence": "DUB-step music makes LINcoln dance a jig in IRELAND",
+    "highlightedWords": ["DUB", "LIN", "IRELAND"],
+    "region": "Europe"
+  },
+  "RUS": {
+    "sentence": "A MOOse is COWing in the Kremlin in RUSSIA",
+    "highlightedWords": ["MOO", "COW", "RUSSIA"],
+    "region": "Europe"
+  },
+  "UKR": {
+    "sentence": "KEY? IV got no idea where it is in UKRAINE",
+    "highlightedWords": ["KEY", "IV", "UKRAINE"],
+    "region": "Europe"
+  },
+  "ROU": {
+    "sentence": "DRACULA is having REST in his BUCHAREST castle in ROMANIA",
+    "highlightedWords": ["DRACULA", "REST", "BUCHAREST", "ROMANIA"],
+    "region": "Europe"
+  },
+  "JPN": {
+    "sentence": "A TOAD doing YOGA on Mount Fuji in JAPAN",
+    "highlightedWords": ["TOAD", "YO", "JAPAN"],
+    "region": "Asia"
+  },
+  "CHN": {
+    "sentence": "BAY-watching lifeguards JING-le bells on the Great Wall of CHINA",
+    "highlightedWords": ["BAY", "JING", "CHINA"],
+    "region": "Asia"
+  },
+  "THA": {
+    "sentence": "My head went BANG when I KOK-a-doodle-dooed in THAILAND",
+    "highlightedWords": ["BANG", "KOK", "THAILAND"],
+    "region": "Asia"
+  },
+  "IND": {
+    "sentence": "A NEW DELI sells curry sandwiches to elephants in INDIA",
+    "highlightedWords": ["NEW", "DELI", "INDIA"],
+    "region": "Asia"
+  },
+  "VNM": {
+    "sentence": "HA! NOI-sy motorcycles everywhere in VIETNAM",
+    "highlightedWords": ["HA", "NOI", "VIETNAM"],
+    "region": "Asia"
+  },
+  "KOR": {
+    "sentence": "My SOUL is doing K-pop dance moves in SOUTH KOREA",
+    "highlightedWords": ["SOUL", "SOUTH KOREA"],
+    "region": "Asia"
+  },
+  "IDN": {
+    "sentence": "JACK is ARTistically batik-painting in INDONESIA",
+    "highlightedWords": ["JACK", "ART", "INDONESIA"],
+    "region": "Asia"
+  },
+  "PHL": {
+    "sentence": "MANILA folders filled with tropical islands in the PHILIPPINES",
+    "highlightedWords": ["MANILA", "PHILIPPINES"],
+    "region": "Asia"
+  },
+  "MYS": {
+    "sentence": "KOALA LUMPUR-ing around the twin towers in MALAYSIA",
+    "highlightedWords": ["KOALA", "LUMPUR", "MALAYSIA"],
+    "region": "Asia"
+  },
+  "SGP": {
+    "sentence": "A lion is having a SING-along in the SINGAPORE zoo",
+    "highlightedWords": ["SING", "SINGAPORE"],
+    "region": "Asia"
+  },
+  "PAK": {
+    "sentence": "IS-lam-A-BAD joke? No, it's the capital of PAKISTAN!",
+    "highlightedWords": ["ISLAM", "BAD", "PAKISTAN"],
+    "region": "Asia"
+  },
+  "IRN": {
+    "sentence": "TEA is HE-RAN-ting everywhere in IRAN",
+    "highlightedWords": ["TEA", "HE", "RAN", "IRAN"],
+    "region": "Asia"
+  },
+  "IRQ": {
+    "sentence": "BAG of DAD jokes in IRAQ",
+    "highlightedWords": ["BAG", "DAD", "IRAQ"],
+    "region": "Asia"
+  },
+  "SAU": {
+    "sentence": "RIYADHiculous camels wearing gold in SAUDI ARABIA",
+    "highlightedWords": ["RIYADH", "SAUDI ARABIA"],
+    "region": "Asia"
+  },
+  "ARE": {
+    "sentence": "ABU's DABBING with his falcon in the UNITED ARAB EMIRATES",
+    "highlightedWords": ["ABU", "DAB", "UNITED ARAB EMIRATES"],
+    "region": "Asia"
+  },
+  "USA": {
+    "sentence": "George is WASHING his TON of laundry in the USA",
+    "highlightedWords": ["WASHING", "TON", "USA"],
+    "region": "North America"
+  },
+  "CAN": {
+    "sentence": "An OTTER said 'WA!' when a moose sat on him in CANADA",
+    "highlightedWords": ["OTTER", "WA", "CANADA"],
+    "region": "North America"
+  },
+  "MEX": {
+    "sentence": "A taco opened a MEXICO CITY inside itself - inception!",
+    "highlightedWords": ["MEXICO CITY", "MEXICO"],
+    "region": "North America"
+  },
+  "CUB": {
+    "sentence": "HA! VANNA White is smoking cigars in CUBA",
+    "highlightedWords": ["HA", "VANNA", "CUBA"],
+    "region": "North America"
+  },
+  "JAM": {
+    "sentence": "The KING is STONed on reggae music in JAMAICA",
+    "highlightedWords": ["KING", "STON", "JAMAICA"],
+    "region": "North America"
+  },
+  "CRI": {
+    "sentence": "SAN JOSE Sharks are surfing in COSTA RICA",
+    "highlightedWords": ["SAN JOSE", "COSTA RICA"],
+    "region": "North America"
+  },
+  "PAN": {
+    "sentence": "PANAMA hats are walking through PANAMA CITY canals",
+    "highlightedWords": ["PANAMA", "PANAMA CITY"],
+    "region": "North America"
+  },
+  "BRA": {
+    "sentence": "A BRA full of ZILLIONS of soccer balls bounces through BRAZIL",
+    "highlightedWords": ["BRA", "ZILLIONS", "BRAZIL"],
+    "region": "South America"
+  },
+  "ARG": {
+    "sentence": "BUENOS! AIRES is too hot for tango dancing in ARGENTINA",
+    "highlightedWords": ["BUENOS", "AIRES", "ARGENTINA"],
+    "region": "South America"
+  },
+  "COL": {
+    "sentence": "BOGOTA to be kidding me with all this coffee in COLOMBIA",
+    "highlightedWords": ["BOGOTA", "COLOMBIA"],
+    "region": "South America"
+  },
+  "PER": {
+    "sentence": "LLAMA is LIMA-ing up the Machu Picchu in PERU",
+    "highlightedWords": ["LLAMA", "LIMA", "PERU"],
+    "region": "South America"
+  },
+  "CHL": {
+    "sentence": "SANTI-claus is AGO-ing down the Andes in CHILE",
+    "highlightedWords": ["SANTI", "AGO", "CHILE"],
+    "region": "South America"
+  },
+  "VEN": {
+    "sentence": "A CAR is ACCUSing everyone of eating arepas in VENEZUELA",
+    "highlightedWords": ["CAR", "ACCUS", "VENEZUELA"],
+    "region": "South America"
+  },
+  "ECU": {
+    "sentence": "QUIT-O eating bananas on the equator in ECUADOR!",
+    "highlightedWords": ["QUIT", "O", "ECUADOR"],
+    "region": "South America"
+  },
+  "EGY": {
+    "sentence": "CARE-ful! OH no! A mummy's driving a CAIROvan in EGYPT",
+    "highlightedWords": ["CARE", "OH", "CAIRO", "EGYPT"],
+    "region": "Africa"
+  },
+  "ZAF": {
+    "sentence": "PRETORIA-ding to be a lion in SOUTH AFRICA",
+    "highlightedWords": ["PRETORIA", "SOUTH AFRICA"],
+    "region": "Africa"
+  },
+  "KEN": {
+    "sentence": "A lion said 'NAI ROB me!' to a giraffe in KENYA",
+    "highlightedWords": ["NAI", "ROB", "KENYA"],
+    "region": "Africa"
+  },
+  "MAR": {
+    "sentence": "A RABBIT wearing a fez hops through MOROCCO",
+    "highlightedWords": ["RABBIT", "MOROCCO"],
+    "region": "Africa"
+  },
+  "NGA": {
+    "sentence": "A BUJA wearing a crown rules NIGERIA",
+    "highlightedWords": ["BUJA", "NIGERIA"],
+    "region": "Africa"
+  },
+  "GHA": {
+    "sentence": "ACCRA-batic dancers move through GHANA",
+    "highlightedWords": ["ACCRA", "GHANA"],
+    "region": "Africa"
+  },
+  "ETH": {
+    "sentence": "ADD-IS your ABBA-dancing to ETHIOPIA's beat!",
+    "highlightedWords": ["ADD", "IS", "ABBA", "ETHIOPIA"],
+    "region": "Africa"
+  },
+  "TZA": {
+    "sentence": "DO! DO! MA! The Sound of Music plays in TANZANIA",
+    "highlightedWords": ["DO", "DO", "MA", "TANZANIA"],
+    "region": "Africa"
+  },
+  "AUS": {
+    "sentence": "A kangaroo CAN BEAR a koala while boxing in AUSTRALIA",
+    "highlightedWords": ["CAN", "BEAR", "AUSTRALIA"],
+    "region": "Oceania"
+  },
+  "NZL": {
+    "sentence": "WELL-ING-ton of sheep fell into a volcano in NEW ZEALAND",
+    "highlightedWords": ["WELL", "ING", "TON", "NEW ZEALAND"],
+    "region": "Oceania"
+  },
+  "FJI": {
+    "sentence": "SUV-A is driving through coral reefs in FIJI",
+    "highlightedWords": ["SUV", "A", "FIJI"],
+    "region": "Oceania"
+  },
+  "TUR": {
+    "sentence": "A turkey is ANKARa-ing loudly in TURKEY",
+    "highlightedWords": ["ANKARA", "TURKEY"],
+    "region": "Asia"
+  },
+  "ISR": {
+    "sentence": "JERRY is SALEMing fish at the market in ISRAEL",
+    "highlightedWords": ["JERRY", "SALEM", "ISRAEL"],
+    "region": "Asia"
+  },
+  "BGR": {
+    "sentence": "A SOFA is taking a nap in BULGARIA",
+    "highlightedWords": ["SOFA", "BULGARIA"],
+    "region": "Europe"
+  },
+  "SRB": {
+    "sentence": "BELLE is GRADing papers in SERBIA",
+    "highlightedWords": ["BELLE", "GRAD", "SERBIA"],
+    "region": "Europe"
+  },
+  "HRV": {
+    "sentence": "ZAG! ZAG! REB-ounding basketballs in CROATIA",
+    "highlightedWords": ["ZAG", "REB", "CROATIA"],
+    "region": "Europe"
+  },
+  "NPL": {
+    "sentence": "CATS are MANDU-cating noodles near Everest in NEPAL",
+    "highlightedWords": ["CATS", "MANDU", "NEPAL"],
+    "region": "Asia"
+  },
+  "LKA": {
+    "sentence": "SRI JAYA is WARDEN of the KOTTE castle in SRI LANKA",
+    "highlightedWords": ["SRI", "JAYA", "KOTTE", "SRI LANKA"],
+    "region": "Asia"
+  },
+  "BGD": {
+    "sentence": "A DUCK is doing a KA-HA dance in BANGLADESH",
+    "highlightedWords": ["DUCK", "KA", "HA", "BANGLADESH"],
+    "region": "Asia"
+  },
+  "MMR": {
+    "sentence": "NAY! PIE is DAWDLING in MYANMAR",
+    "highlightedWords": ["NAY", "PIE", "DAW", "MYANMAR"],
+    "region": "Asia"
+  },
+  "MNG": {
+    "sentence": "ULAN is BAAT-tering yurts with his horse in MONGOLIA",
+    "highlightedWords": ["ULAN", "BAAT", "MONGOLIA"],
+    "region": "Asia"
+  },
+  "PRK": {
+    "sentence": "PYONG is YANGING a gong in NORTH KOREA",
+    "highlightedWords": ["PYONG", "YANG", "NORTH KOREA"],
+    "region": "Asia"
+  },
+  "AFG": {
+    "sentence": "KA-BOOM! A bull dances in AFGHANISTAN",
+    "highlightedWords": ["KA", "BOOM", "AFGHANISTAN"],
+    "region": "Asia"
+  },
+  "LBN": {
+    "sentence": "BEAR-UT is growling at cedars in LEBANON",
+    "highlightedWords": ["BEAR", "UT", "LEBANON"],
+    "region": "Asia"
+  },
+  "JOR": {
+    "sentence": "AM-MAN, those ruins are OLD in JORDAN!",
+    "highlightedWords": ["AM", "MAN", "JORDAN"],
+    "region": "Asia"
+  },
+  "ISL": {
+    "sentence": "REEK-ing YAKS VIKing around geysers in ICELAND",
+    "highlightedWords": ["REEK", "YAK", "VIK", "ICELAND"],
+    "region": "Europe"
+  },
+  "MLT": {
+    "sentence": "A VALLEY full of ETTA candy in MALTA",
+    "highlightedWords": ["VALLEY", "ETTA", "MALTA"],
+    "region": "Europe"
+  },
+  "CYP": {
+    "sentence": "NICE OSHA inspector sunbathing in CYPRUS",
+    "highlightedWords": ["NICE", "OSHA", "CYPRUS"],
+    "region": "Asia"
+  },
+  "LUX": {
+    "sentence": "LUXURIOUS cars driving through LUXEMBOURG",
+    "highlightedWords": ["LUXURIOUS", "LUXEMBOURG"],
+    "region": "Europe"
+  },
+  "MCO": {
+    "sentence": "MONACO is so small the capital IS MONACO!",
+    "highlightedWords": ["MONACO", "IS", "MONACO"],
+    "region": "Europe"
+  },
+  "AND": {
+    "sentence": "AND-ORRA LA VELLA dancing at high altitude in ANDORRA",
+    "highlightedWords": ["AND", "ORRA", "LA VELLA", "ANDORRA"],
+    "region": "Europe"
+  },
+  "LIE": {
+    "sentence": "VA-DUZ anyone want to LIECHTENSTEIN about geography?",
+    "highlightedWords": ["VA", "DUZ", "LIECHTENSTEIN"],
+    "region": "Europe"
+  },
+  "SMR": {
+    "sentence": "SAN MARINO is so tiny the capital IS SAN MARINO!",
+    "highlightedWords": ["SAN MARINO", "IS", "SAN MARINO"],
+    "region": "Europe"
+  },
+  "EST": {
+    "sentence": "TALL-INN keepers serve vodka in ESTONIA",
+    "highlightedWords": ["TALL", "INN", "ESTONIA"],
+    "region": "Europe"
+  },
+  "LVA": {
+    "sentence": "RIGA-mortis is stiff in LATVIA",
+    "highlightedWords": ["RIGA", "LATVIA"],
+    "region": "Europe"
+  },
+  "LTU": {
+    "sentence": "VILLAIN-IUS is plotting in LITHUANIA",
+    "highlightedWords": ["VILLAIN", "IUS", "LITHUANIA"],
+    "region": "Europe"
+  },
+  "BLR": {
+    "sentence": "MINSK-y mouse is running through BELARUS",
+    "highlightedWords": ["MINSK", "BELARUS"],
+    "region": "Europe"
+  },
+  "MDA": {
+    "sentence": "CHI-CHI is NAU-ghty in MOLDOVA",
+    "highlightedWords": ["CHI", "NAU", "MOLDOVA"],
+    "region": "Europe"
+  },
+  "ALB": {
+    "sentence": "TIRANA-saurus Rex is stomping through ALBANIA",
+    "highlightedWords": ["TIRANA", "ALBANIA"],
+    "region": "Europe"
+  },
+  "MKD": {
+    "sentence": "SCOPE-ing out the NORTH MACEDONIA mountains from SKOPJE",
+    "highlightedWords": ["SCOPE", "NORTH MACEDONIA", "SKOPJE"],
+    "region": "Europe"
+  },
+  "MNE": {
+    "sentence": "POD of GORICA dolphins swim through MONTENEGRO",
+    "highlightedWords": ["POD", "GORICA", "MONTENEGRO"],
+    "region": "Europe"
+  },
+  "BIH": {
+    "sentence": "SARA-h is JEV-ously dancing in BOSNIA AND HERZEGOVINA",
+    "highlightedWords": ["SARA", "JEV", "BOSNIA"],
+    "region": "Europe"
+  },
+  "SVN": {
+    "sentence": "I LOVE JANA's BLUB in SLOVENIA",
+    "highlightedWords": ["LOVE", "JANA", "BLUB", "SLOVENIA"],
+    "region": "Europe"
+  },
+  "SVK": {
+    "sentence": "BRATTY SLAVA dancing polka in SLOVAKIA",
+    "highlightedWords": ["BRATTY", "SLAVA", "SLOVAKIA"],
+    "region": "Europe"
+  },
+  "QAT": {
+    "sentence": "DO-HA! A camel is playing soccer in QATAR",
+    "highlightedWords": ["DO", "HA", "QATAR"],
+    "region": "Asia"
+  },
+  "KWT": {
+    "sentence": "KUWAIT CITY is so KUWAITING for you!",
+    "highlightedWords": ["KUWAIT CITY", "KUWAITING", "KUWAIT"],
+    "region": "Asia"
+  },
+  "BHR": {
+    "sentence": "MAN-AMA eating pearls in BAHRAIN",
+    "highlightedWords": ["MAN", "AMA", "BAHRAIN"],
+    "region": "Asia"
+  },
+  "OMN": {
+    "sentence": "MUSC-ular CAT is flexing in OMAN",
+    "highlightedWords": ["MUSC", "CAT", "OMAN"],
+    "region": "Asia"
+  },
+  "YEM": {
+    "sentence": "SAN-ta is NAA-ughty in YEMEN",
+    "highlightedWords": ["SAN", "NAA", "YEMEN"],
+    "region": "Asia"
+  },
+  "SYR": {
+    "sentence": "DAM-ASK me about DAMASCUS in SYRIA!",
+    "highlightedWords": ["DAM", "ASK", "DAMASCUS", "SYRIA"],
+    "region": "Asia"
+  },
+  "DZA": {
+    "sentence": "ALGIERS are full of spiders in ALGERIA",
+    "highlightedWords": ["ALGIERS", "ALGERIA"],
+    "region": "Africa"
+  },
+  "TUN": {
+    "sentence": "TUNA is swimming through TUNIS in TUNISIA",
+    "highlightedWords": ["TUNA", "TUNIS", "TUNISIA"],
+    "region": "Africa"
+  },
+  "LBY": {
+    "sentence": "TRIPOLI-ting over camels in LIBYA",
+    "highlightedWords": ["TRIPOLI", "LIBYA"],
+    "region": "Africa"
+  },
+  "SDN": {
+    "sentence": "KHART-OOM! Pyramids explode in SUDAN",
+    "highlightedWords": ["KHART", "OOM", "SUDAN"],
+    "region": "Africa"
+  }
+}

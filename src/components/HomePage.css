@@ -62,7 +62,6 @@
   margin-bottom: 0;
   font-weight: var(--font-normal);
 }
-}
 
 .game-info {
   background: var(--bg-secondary);
@@ -300,16 +299,17 @@
   gap: var(--space-4);
 }
 
-/* Secondary buttons (Practice/Improve) */
+/* Secondary buttons (Practice/Improve/Study/Memory) - 2x2 grid */
 .secondary-buttons {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   gap: var(--space-3);
 }
 
 .study-button,
 .practice-button,
-.improve-button {
+.improve-button,
+.memory-palace-button {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -359,6 +359,19 @@
 .improve-button:hover:not(:disabled) {
   background: var(--feedback-warning);
   color: var(--text-inverse);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-sm);
+}
+
+.memory-palace-button {
+  color: var(--color-purple-600);
+  border-color: var(--color-purple-400);
+}
+
+.memory-palace-button:hover {
+  background: var(--color-purple-500);
+  border-color: var(--color-purple-500);
+  color: white;
   transform: translateY(-1px);
   box-shadow: var(--shadow-sm);
 }
@@ -429,11 +442,13 @@
 
   .secondary-buttons {
     gap: var(--space-2);
+    grid-template-columns: repeat(2, 1fr);
   }
 
   .study-button,
   .practice-button,
-  .improve-button {
+  .improve-button,
+  .memory-palace-button {
     padding: var(--space-3) var(--space-2);
     font-size: var(--text-sm);
   }

@@ -4,6 +4,7 @@
  * Phase 2: Enhanced animations, mastery badges
  * Phase 4: Sound effects integration
  * Phase 5: Hint system integration
+ * Phase 6: Memory sentences in feedback
  */
 
 import { useState, useRef, useEffect } from 'react';
@@ -13,6 +14,7 @@ import { fuzzyMatch, getAllAnswers } from '../utils/fuzzyMatch';
 import { playCorrectSound, playIncorrectSound } from '../utils/audio';
 import { getHint, getMaxHintLevel, getHintButtonLabel } from '../utils/hints';
 import { getMnemonic, getCategoryLabel } from '../utils/mnemonics';
+import { getMemorySentence, formatSentenceWithHighlights } from '../utils/memorySentences';
 import './Card.css';
 
 /**
@@ -251,6 +253,28 @@ export default function Card({ question }) {
                   <span className="mnemonic-category">{getCategoryLabel(getMnemonic(question.id).category)}</span>
                 </div>
                 <p className="mnemonic-text">{getMnemonic(question.id).tip}</p>
+              </div>
+            )}
+
+            {/* Memory Sentence - Phase 6 */}
+            {getMemorySentence(question.id) && (
+              <div className="memory-sentence">
+                <div className="memory-sentence-header">
+                  <span className="memory-icon">🧠</span>
+                  <span className="memory-label">Memory Trick</span>
+                </div>
+                <p className="memory-sentence-text">
+                  {formatSentenceWithHighlights(
+                    getMemorySentence(question.id).sentence,
+                    getMemorySentence(question.id).highlightedWords
+                  ).map((part) => (
+                    part.isHighlight ? (
+                      <span key={part.key} className="memory-highlight">{part.text}</span>
+                    ) : (
+                      <span key={part.key}>{part.text}</span>
+                    )
+                  ))}
+                </p>
               </div>
             )}
           </div>
